@@ -2,6 +2,7 @@
 const dotenv = require("dotenv")
 dotenv.config()
 
+// Import dependencies
 const express = require("express")
 const helmet = require("helmet")
 const cors = require("cors")
@@ -23,6 +24,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use("/api/v1", v1Router)
 
 app.get("/", (_, res) => res.send("Welcome to the API"))
+
 
 // Start server
 app.listen(config.PORT, () => console.log(`Server is running on http://localhost:${config.PORT}`))
