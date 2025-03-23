@@ -1,0 +1,13 @@
+
+# Node Modules
+node_modules
+
+# Lock Files
+pnpm-lock.yaml
+
+# Environment Variables
+.env
+.env.local
+
+# Data and Database Files
+*.sqlite
