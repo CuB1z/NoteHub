@@ -18,8 +18,13 @@ async function fetchFrom(url, method = "GET", headers = {}) {
         throw new Error(`Failed to fetch from ${url}`);
     }
 
-    const data = await res.json();
-    return { data };
+    if (res.headers.get("Content-Type").includes("application/json")) {
+        const data = await res.json();
+        return { data };
+    } else {
+        const data = await res.text();
+        return { data };
+    }
 }
 
 export { fetchFrom };
