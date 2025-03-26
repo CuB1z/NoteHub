@@ -1,0 +1,36 @@
+.tree {
+    list-style: none;
+    padding-left: 1rem;
+    margin: 0;
+}
+
+.treeItem {
+    margin: 0.5rem 0;
+}
+
+.file {
+    text-decoration: none;
+    color: #007acc;
+    font-weight: normal;
+    transition: color 0.2s ease;
+}
+
+.file:hover {
+    color: #005f99;
+    text-decoration: underline;
+}
+
+.folder {
+    cursor: pointer;
+    font-weight: bold;
+    color: #333;
+    transition: color 0.2s ease;
+
+    &.activeFolder {
+        color: #007acc;
+    }
+}
+
+.folder:hover {
+    color: #007acc;
+}

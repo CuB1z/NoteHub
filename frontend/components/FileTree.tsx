@@ -1,31 +1,53 @@
-// filepath: a:\CuB1\markdown-publisher\frontend\components\FileTree.tsx
-import { FileNode } from "../types/FileNode";
+import { useState } from "react";
+import { FileNode } from "@/types/FileNode";
+import styles from "@/styles/FileTree.module.css";
 
 interface FileTreeProps {
-  nodes: FileNode[];
+	nodes: FileNode[];
 }
 
 export function FileTree({ nodes }: FileTreeProps) {
-  const renderTree = (nodes: FileNode[]) => {
-    return (
-      <ul>
-        {nodes.map((node) => (
-          <li key={node.path}>
-            {node.type === "file" ? (
-              <a href={node.url} target="_blank" rel="noopener noreferrer">
-                {node.name}
-              </a>
-            ) : (
-              <>
-                <strong>{node.name}</strong>
-                {node.children && <FileTree nodes={node.children} />}
-              </>
-            )}
-          </li>
-        ))}
-      </ul>
-    );
-  };
+	const [openFolders, setOpenFolders] = useState<Record<string, boolean>>({});
 
-  return renderTree(nodes);
+	const toggleFolder = (path: string) => {
+		setOpenFolders((prev) => ({
+			...prev,
+			[path]: !prev[path],
+		}));
+	};
+
+	const renderTree = (nodes: FileNode[]) => {
+		return (
+			<ul className={styles.tree}>
+				{nodes.map((node) => (
+					<li key={node.path} className={styles.treeItem}>
+						{node.type === "file" ? (
+							<a
+								href={`/CuB1z/Obsidian-Notes/${node.path}`}
+								target="_blank"
+								rel="noopener noreferrer"
+								className={styles.file}
+							>
+								{node.name}
+							</a>
+						) : (
+							<>
+								<span
+									className={`${styles.folder} ${openFolders[node.path] ? styles.activeFolder : ""}`}
+									onClick={() => toggleFolder(node.path)}
+								>
+									{node.name}
+								</span>
+								{openFolders[node.path] && node.children && (
+									<FileTree nodes={node.children} />
+								)}
+							</>
+						)}
+					</li>
+				))}
+			</ul>
+		);
+	};
+
+	return renderTree(nodes);
 }

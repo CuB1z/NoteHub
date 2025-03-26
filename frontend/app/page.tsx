@@ -15,7 +15,11 @@ export default function Home() {
 	return (
 		<>
 			<h1>Repository Files</h1>
-			{data ? <FileTree nodes={data} /> : <p>No data available</p>}
+			{data && data.length > 0 ? (
+				<FileTree nodes={data} />
+			) : (
+				<p>No files found.</p>
+			)}
 		</>
 	);
 }
