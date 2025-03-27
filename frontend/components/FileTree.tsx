@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { FileNode } from "@/types/FileNode";
 import styles from "@/styles/FileTree.module.css";
