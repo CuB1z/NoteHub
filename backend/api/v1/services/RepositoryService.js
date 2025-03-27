@@ -1,4 +1,3 @@
-const { GITHUB_TOKEN } = require("../../config/index.js");
 const { fetchFrom } = require("./FetchService.js");
 
 const BASE_GITHUB_API_URL = "https://api.github.com/repos";
@@ -8,13 +7,13 @@ const BASE_GITHUB_API_URL = "https://api.github.com/repos";
  * @param {Object} options - The options for the request
  * @param {string} options.githubOwner - The owner of the GitHub repository
  * @param {string} options.githubRepo - The name of the GitHub repository
- * @param {string} options.path - The path to the directory in the repository
+ * @param {string} options.path - The path to the directory in the repository (optional)
+ * @param {string} options.headers - The headers for the request (optional)
  * 
  * @returns {Promise<Array>} - The structure of the repository
  */
-async function getRepoStructure({ githubOwner, githubRepo, path = "" }) {
+async function getRepoStructure({ githubOwner, githubRepo, path = "", headers = {} }) {
 	const url = `${BASE_GITHUB_API_URL}/${githubOwner}/${githubRepo}/contents/${path}`;
-	const headers = { Authorization: `Bearer ${GITHUB_TOKEN}` };
 
 	try {
 		const { data: items } = await fetchFrom(url, "GET", headers);
@@ -32,7 +31,7 @@ async function getRepoStructure({ githubOwner, githubRepo, path = "" }) {
 			};
 
 			if (node.type === "dir") {
-				node.children = await getRepoStructure({ githubOwner, githubRepo, path: item.path });
+				node.children = await getRepoStructure({ githubOwner, githubRepo, path: item.path, headers });
 			} else if (node.type === "file") {
 				node.url = item.download_url;
 			}
@@ -53,13 +52,13 @@ async function getRepoStructure({ githubOwner, githubRepo, path = "" }) {
  * @param {Object} options - The options for the request
  * @param {string} options.githubOwner - The owner of the GitHub repository
  * @param {string} options.githubRepo - The name of the GitHub repository
- * @param {string} options.path - The path to the file in the repository
+ * @param {string} options.path - The path to the file in the repository (optional)
+ * @param {string} options.token - The GitHub token for authentication (optional)
  * 
  * @returns {Promise<string>} - The content of the file
  */
-async function getFileContent({ githubOwner, githubRepo, path }) {
+async function getFileContent({ githubOwner, githubRepo, path = "", headers = {} }) {
 	const url = `${BASE_GITHUB_API_URL}/${githubOwner}/${githubRepo}/contents/${path}`;
-	const headers = { Authorization: `Bearer ${GITHUB_TOKEN}` };
 
 	try {
 		const { data: fileData } = await fetchFrom(url, "GET", headers);

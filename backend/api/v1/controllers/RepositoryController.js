@@ -1,10 +1,16 @@
 const RepositoryService = require("../services/RepositoryService.js");
 
 async function getRepositoryStructure(req, res) {
-    repoData = {
+    console.info("[GET] /repositories/:owner/:repo");
+
+    const authToken = req.headers["authorization"]?.split(" ")[1] || null;
+    const repoData = {
         githubOwner: req.params.owner || "CuB1z",
         githubRepo: req.params.repo || "Obsidian-Notes",
-        path: req.query.path || ""
+        path: req.query.path || "",
+        headers: {
+            "Authorization": authToken ? `Bearer ${authToken}` : null
+        }
     };
 
     try {
@@ -16,10 +22,16 @@ async function getRepositoryStructure(req, res) {
 }
 
 async function getFileContent(req, res) {
+    console.info("[GET] /repositories/:owner/:repo/:path(*)");
+
+    const authToken = req.headers["authorization"]?.split(" ")[1] || null;
     const repoData = {
         githubOwner: req.params.owner || "CuB1z",
         githubRepo: req.params.repo || "Obsidian-Notes",
-        path: req.params.path || ""
+        path: req.params.path || "",
+        headers: {
+            "Authorization": authToken ? `Bearer ${authToken}` : null
+        }
     };
 
     try {
