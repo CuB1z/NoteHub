@@ -1,20 +1,9 @@
-"use client";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import LoginClient from "@/components/clients/LoginClient";
 
-import { signIn, signOut, useSession } from "next-auth/react";
+export default async function LoginPage() {
+  const session = await getServerSession(authOptions);
 
-export default function LoginPage() {
-  const { data: session } = useSession();
-
-  return (
-    <div>
-      {session ? (
-        <>
-          <p>Welcome, {session.user?.name}!</p>
-          <button onClick={() => signOut()}>Sign out</button>
-        </>
-      ) : (
-        <button onClick={() => signIn("github")}>Sign in with GitHub</button>
-      )}
-    </div>
-  );
+  return <LoginClient session={session} />;
 }

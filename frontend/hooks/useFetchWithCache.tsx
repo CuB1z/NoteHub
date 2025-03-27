@@ -2,15 +2,34 @@
 
 import { useState, useEffect } from "react";
 
-export function useFetchWithCache<T>(url: string, cacheKey: string) {
+interface FetchOptions {
+  authToken: string;
+  method?: string;
+}
+
+export function useFetchWithCache<T>(url: string, cacheKey: string, options: FetchOptions) {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchData() {
-      const cachedData = localStorage.getItem(cacheKey);
+      setLoading(true);
+      setError(null);
+      setData(null);
 
+      if (!options?.authToken || !url) {
+        setLoading(false);
+        return;
+      }
+
+      const cachedToken = localStorage.getItem(`${cacheKey}-token`);
+      if (cachedToken !== options?.authToken) {
+        localStorage.removeItem(cacheKey);
+        localStorage.setItem(`${cacheKey}-token`, options?.authToken || "");
+      }
+
+      const cachedData = localStorage.getItem(cacheKey);
       if (cachedData) {
         setData(JSON.parse(cachedData));
         setLoading(false);
@@ -18,7 +37,13 @@ export function useFetchWithCache<T>(url: string, cacheKey: string) {
       }
 
       try {
-        const res = await fetch(url);
+        const res = await fetch(url, {
+          method: options?.method || "GET",
+          headers: {
+            Authorization: `Bearer ${options?.authToken}`,
+          }
+        });
+
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
         }
@@ -39,7 +64,7 @@ export function useFetchWithCache<T>(url: string, cacheKey: string) {
     }
 
     fetchData();
-  }, [url, cacheKey]);
+  }, [url, cacheKey, options?.authToken]);
 
   return { data, loading, error };
 }
