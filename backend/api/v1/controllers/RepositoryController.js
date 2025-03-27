@@ -1,7 +1,7 @@
 const RepositoryService = require("../services/RepositoryService.js");
 
 async function getRepositoryStructure(req, res) {
-    console.info("[GET] /repositories/:owner/:repo");
+    console.info(`[GET] ${req.originalUrl}`);
 
     const authToken = req.headers["authorization"]?.split(" ")[1] || null;
     const repoData = {
@@ -22,7 +22,7 @@ async function getRepositoryStructure(req, res) {
 }
 
 async function getFileContent(req, res) {
-    console.info("[GET] /repositories/:owner/:repo/:path(*)");
+    console.info(`[GET] ${req.originalUrl}`);
 
     const authToken = req.headers["authorization"]?.split(" ")[1] || null;
     const repoData = {
