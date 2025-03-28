@@ -5,7 +5,7 @@ import { FileNode } from "@/types/FileNode";
 import styles from "@/styles/FileTree.module.css";
 
 interface FileTreeProps {
-	nodes: FileNode[];
+	nodes: FileNode[] | null;
 }
 
 export function FileTree({ nodes }: FileTreeProps) {
@@ -17,6 +17,10 @@ export function FileTree({ nodes }: FileTreeProps) {
 			[path]: !prev[path],
 		}));
 	};
+
+	if (!nodes) {
+		return <p>No repository files found.</p>;
+	}
 
 	const renderTree = (nodes: FileNode[]) => {
 		return (
