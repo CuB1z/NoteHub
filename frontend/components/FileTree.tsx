@@ -5,10 +5,11 @@ import { FileNode } from "@/types/FileNode";
 import styles from "@/styles/FileTree.module.css";
 
 interface FileTreeProps {
+	basePath: string;
 	nodes: FileNode[] | null;
 }
 
-export function FileTree({ nodes }: FileTreeProps) {
+export function FileTree({ nodes, basePath }: FileTreeProps) {
 	const [openFolders, setOpenFolders] = useState<Record<string, boolean>>({});
 
 	const toggleFolder = (path: string) => {
@@ -29,7 +30,7 @@ export function FileTree({ nodes }: FileTreeProps) {
 					<li key={node.path} className={styles.treeItem}>
 						{node.type === "file" ? (
 							<a
-								href={`/CuB1z/Obsidian-Notes/${node.path}`}
+								href={`/${basePath}/${node.name}`}
 								target="_blank"
 								rel="noopener noreferrer"
 								className={styles.file}
@@ -45,7 +46,7 @@ export function FileTree({ nodes }: FileTreeProps) {
 									{node.name}
 								</span>
 								{openFolders[node.path] && node.children && (
-									<FileTree nodes={node.children} />
+									<FileTree nodes={node.children} basePath={`${basePath}/${node.name}`} />
 								)}
 							</>
 						)}
