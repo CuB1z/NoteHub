@@ -24,6 +24,9 @@ async function getRepoStructure({ githubOwner, githubRepo, path = "", headers = 
 			// Skip hidden files
 			if (item.name.startsWith(".")) continue;
 
+			// Skip unsupported file types
+			if (item.type === "file" && !item.name.endsWith(".md")) continue;
+
 			// Create a node for the item
 			let node = {
 				name: item.name,
@@ -33,6 +36,8 @@ async function getRepoStructure({ githubOwner, githubRepo, path = "", headers = 
 
 			if (node.type === "dir") {
 				node.children = await getRepoStructure({ githubOwner, githubRepo, path: item.path, headers });
+				if (node.children.length === 0) continue;
+				
 			} else if (node.type === "file") {
 				node.url = item.download_url;
 			}
