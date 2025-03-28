@@ -1,5 +1,7 @@
 import { parseMarkdown } from "@/lib/parseMarkdown";
 
+import "@/styles/markdown.css";
+
 interface MarkdownRendererProps {
     markdown: string;
 }

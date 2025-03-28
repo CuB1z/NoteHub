@@ -1,0 +1,132 @@
+
+:root {
+    --bg-color: #282828;
+    --fg-color: #ebdbb2;
+    --accent-color: #83a598;
+    --highlight-color: #d79921;
+    --border-color: #3c3836;
+    --link-color: #8ec07c;
+    --code-bg-color: #3c3836;
+    --code-fg-color: #fdf4c1;
+    --blockquote-bg-color: #32302f;
+}
+
+.markdown-body {
+    background-color: var(--bg-color);
+    color: var(--fg-color);
+    line-height: 1.6;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    border-radius: 8px;
+
+    h1,
+    h2,
+    h3 {
+        color: var(--highlight-color);
+        margin-top: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    h3 {
+        font-size: 1.75rem;
+    }
+
+    p {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    ul,
+    ol {
+        margin-left: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    li {
+        margin-bottom: 0.5rem;
+    }
+
+    a {
+        color: var(--link-color);
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    strong {
+        font-weight: bold;
+        color: var(--accent-color);
+    }
+
+    em {
+        font-style: italic;
+        color: var(--accent-color);
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+
+    pre {
+        background-color: var(--code-bg-color);
+        border: 1px solid var(--border-color);
+        padding: 1rem;
+        border-radius: 4px;
+        font-family: 'Fira Code', monospace;
+        font-size: 0.875rem;
+        overflow-x: auto;
+        color: var(--code-fg-color);
+    }
+
+    code {
+        background-color: var(--code-bg-color);
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+        font-size: 0.875rem;
+        color: var(--code-fg-color);
+    }
+
+    blockquote {
+        background-color: var(--blockquote-bg-color);
+        border-left: 4px solid var(--accent-color);
+        padding-left: 1rem;
+        margin-left: 0;
+        color: var(--fg-color);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 1rem;
+    }
+
+    th,
+    td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+        background-color: var(--bg-color);
+        font-weight: bold;
+    }
+
+    ol {
+        list-style-type: decimal;
+    }
+}
