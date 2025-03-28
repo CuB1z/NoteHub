@@ -1,4 +1,5 @@
 const { fetchFrom } = require("./FetchService.js");
+const { parseMarkdown } = require("./MarkdownService.js");
 
 const BASE_GITHUB_API_URL = "https://api.github.com/repos";
 
@@ -63,9 +64,14 @@ async function getFileContent({ githubOwner, githubRepo, path = "", headers = {}
 	try {
 		const { data: fileData } = await fetchFrom(url, "GET", headers);
 		const fileContentResponse = await fetchFrom(fileData.download_url, "GET", headers);
+
+		// Parse file metadata and content
+		const parsedFile = parseMarkdown(fileContentResponse.data);
+
 		return {
 			name: fileData.name,
-			content: fileContentResponse.data,
+			frontmatter: parsedFile.frontmatter,
+			content: parsedFile.content,
 		}
 	} catch (error) {
 		console.error("Error fetching file content from GitHub: ", url);
