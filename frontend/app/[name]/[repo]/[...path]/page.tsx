@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { fetchData } from "@/lib/fetchData";
@@ -16,6 +17,10 @@ export default async function DynamicPathPage(context: PageProps) {
     const params = await context.params;
     const session = await getServerSession(authOptions);
     const fullPath = `${params.name}/${params.repo}/${params.path.join("/")}`;
+
+    if (!fullPath.endsWith(".md")) {
+        redirect(`/${params.name}/${params.repo}`);
+    }
 
     const response = await fetchData<ContentResponse>(
         `http://localhost:5000/api/v1/repositories/${fullPath}`,

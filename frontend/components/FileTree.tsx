@@ -31,8 +31,6 @@ export function FileTree({ nodes, basePath }: FileTreeProps) {
 						{node.type === "file" ? (
 							<a
 								href={`/${basePath}/${node.name}`}
-								target="_blank"
-								rel="noopener noreferrer"
 								className={styles.file}
 							>
 								{node.name}
