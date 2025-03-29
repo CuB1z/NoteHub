@@ -14,6 +14,9 @@ importers:
       marked:
         specifier: ^15.0.7
         version: 15.0.7
+      marked-gfm-heading-id:
+        specifier: ^4.1.1
+        version: 4.1.1(marked@15.0.7)
       marked-katex-extension:
         specifier: ^5.1.4
         version: 5.1.4(katex@0.16.21)(marked@15.0.7)
@@ -267,6 +270,9 @@ packages:
     resolution: {integrity: sha512-bwy0MGW55bG41VqxxypOsdSdGqLwXPI/focwgTYCFMbdUiBAxLg9CFzG08sz2aqzknwiX7Hkl0bQENjg8iLByw==}
     engines: {node: '>=8'}
 
+  github-slugger@2.0.0:
+    resolution: {integrity: sha512-IaOQ9puYtjrkq7Y0Ygl9KDZnrf/aiUJYUpVf89y8kyaxbRG7Y1SrX/jaumrv81vc61+kiMempujsM3Yw7w5qcw==}
+
   is-arrayish@0.3.2:
     resolution: {integrity: sha512-eVRqCvVlZbuw3GrM63ovNSNAeA1K16kaR/LRY/92w0zxQ5/1YzwblUX652i4Xs9RwAGjW9d9y6X88t8OaAJfWQ==}
 
@@ -284,6 +290,11 @@ packages:
   lru-cache@6.0.0:
     resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}
     engines: {node: '>=10'}
+
+  marked-gfm-heading-id@4.1.1:
+    resolution: {integrity: sha512-EeQZieAQmsI6c2tWLx0ETd0VjPwLV8qi+HT0dIsfVMERm0rCIuXfRvZXJbo1SgUi++lmuR1LVY+QzgNiLNvVpw==}
+    peerDependencies:
+      marked: '>=13 <16'
 
   marked-katex-extension@5.1.4:
     resolution: {integrity: sha512-GQOio4vCp0laxB1IY+2oNVo5nbn82yWMDP/jILRYHmyu2WXMVlXCB+krq2/U2fQn+V9j8aqDmnNdrsgqG2AkGQ==}
@@ -603,6 +614,8 @@ snapshots:
   detect-libc@2.0.3:
     optional: true
 
+  github-slugger@2.0.0: {}
+
   is-arrayish@0.3.2:
     optional: true
 
@@ -617,6 +630,11 @@ snapshots:
   lru-cache@6.0.0:
     dependencies:
       yallist: 4.0.0
+
+  marked-gfm-heading-id@4.1.1(marked@15.0.7):
+    dependencies:
+      github-slugger: 2.0.0
+      marked: 15.0.7
 
   marked-katex-extension@5.1.4(katex@0.16.21)(marked@15.0.7):
     dependencies:
