@@ -10,11 +10,12 @@ interface HeaderProps {
 
 export default function Header({ session }: HeaderProps) {
     const userName = session?.userName;
-    console.log("Header session", session);
 
     return (
         <header className={styles.header}>
-            <h1>NoteHub</h1>
+            <a href="/" className={styles.logo}>
+                <h1>NoteHub</h1>
+            </a>
             <div className={styles.content}>
                 {session ?
                     <a href={`/${userName || ""}`} className={styles.userName}>

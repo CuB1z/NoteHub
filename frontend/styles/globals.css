@@ -1,7 +1,15 @@
 :root {
-  --background: #212225;
-  --background-light: #2e343c;
-  --foreground: #ededed;
+  --background: #282828;
+  --background-light: #3c3836;
+  --foreground: #d1bd8b;
+  --foreground-light: #dccba0d0;
+  --primary: #fabd2f;
+  --secondary: #d3869b;
+  --accent: #8ec07c;
+  --error: #fb4934;
+  --warning: #fe8019;
+  --info: #83a598;
+  --success: #b8bb26;
 }
 
 body {

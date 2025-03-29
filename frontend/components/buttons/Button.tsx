@@ -3,31 +3,44 @@
 import styles from "@/styles/Button.module.css";
 
 interface ButtonProps {
-    label: string;
+    label?: string;
+    icon?: string;
+    alt?: string;
+    iconPosition?: "left" | "right";
     isLink?: boolean;
     href?: string;
     onClick: () => void;
     disabled?: boolean;
-    variant: "primary" | "secondary";
+    variant: "primary" | "secondary" | "tool";
 }
 
-export default function Button({ label, isLink, href, onClick, disabled, variant }: ButtonProps) {
-    const customStyles = `${styles.button} ${styles[variant]}`;
+export default function Button({ label, alt, isLink, href, onClick, disabled, variant, icon, iconPosition }: ButtonProps) {
+    const customStyles = `${styles.button} ${styles[variant]} ${iconPosition ? styles[iconPosition] : ""}`;
 
     const handleClick = () => {
         if (disabled) return;
+        console.log("Button clicked:", label);
         onClick();
     }
 
+    const content = (
+        <>
+            {icon && <img src={icon} alt={alt} className={styles.icon} />}
+            {label && <span className={styles.label}>{label}</span>}
+        </>
+    )
+
     if (isLink) {
         return (
-            <a className={customStyles} href={href}>{label}</a>
+            <a className={customStyles} href={href}>
+                {content}
+            </a>
         );
     }
 
     return (
         <button className={customStyles} onClick={handleClick} disabled={disabled}>
-            {label}
+            {content}
         </button>
     );
 }
