@@ -1,8 +1,13 @@
 "use client";
 
 import { signIn, signOut } from "next-auth/react";
+import { Session } from "next-auth";
 
-export default function LoginClient({ session }: { session: any }) {
+interface LoginClientProps {
+  session: Session | null;
+}
+
+export default function LoginClient({ session }: LoginClientProps) {
   return (
     <div>
       {session ? (

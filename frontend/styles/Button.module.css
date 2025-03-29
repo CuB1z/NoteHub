@@ -1,0 +1,22 @@
+.button {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 6px;
+    border: 1px solid #323334;
+    cursor: pointer;
+
+    &.primary {
+        background-color: #2b2e2f;
+    }
+
+    &.secondary {
+        background-color: #f44336;
+    }
+}
