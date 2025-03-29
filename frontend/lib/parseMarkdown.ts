@@ -18,7 +18,7 @@ export function parseMarkdown(markdown: string): string {
                 .toLocaleLowerCase()
                 .replace(/ /g, "-")
                 .replace(/%20/g, "-")
-                .replace(/[()]/g, "");
+                .replace(/[(¿?)]/g, "");
 
             return `<a href="${newHref}">${text}</a>`;
         } else {

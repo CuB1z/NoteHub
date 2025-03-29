@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import SessionWrapper from "@/components/wrappers/SessionWrapper";
 
 import { Session } from "next-auth";
+import Footer from "@/components/Footer";
 
 type Props = {
     session: Session | null;
@@ -18,6 +19,7 @@ export default function Layout({ session, children }: Props) {
                     <div className={styles.content}>
                         {children}
                     </div>
+                <Footer />
             </div>
         </SessionWrapper>
     )

@@ -4,6 +4,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { fetchData } from "@/lib/fetchData";
 import { ContentResponse } from "@/types/ContentResponse";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
+import Layout from "@/layouts/Layout";
 
 interface PageProps {
     params: {
@@ -27,5 +28,9 @@ export default async function DynamicPathPage(context: PageProps) {
         session?.accessToken as string,
     );
 
-    return <MarkdownRenderer markdown={response?.content || ""} />;
+    return (
+        <Layout session={session}>
+            <MarkdownRenderer markdown={response?.content || ""} />
+        </Layout>
+    );
 }

@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { FileTree } from "@/components/FileTree";
 import { fetchData } from "@/lib/fetchData";
 import { FileNode } from "@/types/FileNode";
+import Layout from "@/layouts/Layout";
 
 interface PageProps {
     params: {
@@ -22,5 +23,9 @@ export default async function RepositoryPage(context: PageProps) {
 	)
 
 	
-	return <FileTree nodes={nodes} basePath={fullPath} />;
+	return (
+		<Layout session={session}>
+			<FileTree nodes={nodes} basePath={fullPath} />
+		</Layout>
+	);
 }
