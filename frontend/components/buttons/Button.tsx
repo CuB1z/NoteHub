@@ -11,15 +11,24 @@ interface ButtonProps {
     href?: string;
     onClick: () => void;
     disabled?: boolean;
+    status?: "loading" | "success" | "error";
     variant: "primary" | "secondary" | "tool";
 }
 
-export default function Button({ label, alt, isLink, href, onClick, disabled, variant, icon, iconPosition }: ButtonProps) {
-    const customStyles = `${styles.button} ${styles[variant]} ${iconPosition ? styles[iconPosition] : ""}`;
+export default function Button({
+    label, alt, isLink, href, onClick, disabled,
+    variant, icon, iconPosition, status
+}: ButtonProps) {
+    const customStyles = `
+        ${styles.button}
+        ${styles[variant]}
+        ${iconPosition ? styles[iconPosition] : ""}
+        ${disabled ? styles.disabled : ""}
+        ${status ? styles[status] : ""}
+    `;
 
     const handleClick = () => {
         if (disabled) return;
-        console.log("Button clicked:", label);
         onClick();
     }
 

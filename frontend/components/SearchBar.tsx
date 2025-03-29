@@ -6,12 +6,17 @@ import Button from "@/components/buttons/Button";
 
 export default function SearchBar() {
     const [search, setSearch] = useState<string>("");
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [icon, setIcon] = useState<string>("/assets/icons/search.svg");
 
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearch(event.target.value);
     }
 
     const handleSearchSubmit = () => {
+        setIsLoading(true);
+        setIcon("/assets/icons/loader.svg");
+
         const realUrl = search.split("https://github.com/")[1]
         if (realUrl) {
             window.location.href = `/${realUrl}`;
@@ -30,8 +35,9 @@ export default function SearchBar() {
             <Button
                 variant="tool"
                 alt="Search"
-                icon="/assets/icons/search.svg"
+                icon={icon}
                 onClick={() => handleSearchSubmit()}
+                status={isLoading ? "loading" : undefined}
             />
         </div>
     );
