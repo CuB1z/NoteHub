@@ -9,7 +9,8 @@ interface HeaderProps {
 }
 
 export default function Header({ session }: HeaderProps) {
-    const userName = session?.user?.name;
+    const userName = session?.userName;
+    console.log("Header session", session);
 
     return (
         <header className={styles.header}>

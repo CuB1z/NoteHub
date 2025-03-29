@@ -5,6 +5,7 @@ import GitHubProvider from "next-auth/providers/github";
 declare module "next-auth" {
   interface Session {
     accessToken?: string;
+    userName?: string;
   }
 }
 
@@ -23,11 +24,18 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async session({ session, token }) {
       session.accessToken = token.accessToken as string;
+      session.userName = token.userName as string;
       return session;
     },
     async jwt({ token, account }) {
       if (account) {
+        const response = await fetch("https://api.github.com/user", {
+          headers: { Authorization: `Bearer ${account.access_token}` },
+        });
+
+        const profile = await response.json();
         token.accessToken = account.access_token;
+        token.userName = profile.login;
       }
       return token;
     },
