@@ -1,11 +1,12 @@
 :root {
-  --background: #282828;
-  --background-light: #3c3836;
+  --bg-primary: #282828;
+  --bg-secondary: #1d2021;
+  --accent: #d1bd8b;
+  --accent-light: #dccba0d0;
   --foreground: #d1bd8b;
   --foreground-light: #dccba0d0;
   --primary: #fabd2f;
   --secondary: #d3869b;
-  --accent: #8ec07c;
   --error: #fb4934;
   --warning: #fe8019;
   --info: #83a598;
@@ -21,7 +22,7 @@ body {
   align-items: center;
   justify-content: center;
   color: var(--foreground);
-  background: var(--background);
+  background: var(--bg-primary);
 }
 
 * {
@@ -31,7 +32,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   scroll-behavior: smooth;
   scrollbar-width: thin;
-  scrollbar-color: var(--foreground) var(--background);
+  scrollbar-color: var(--accent-light) var(--bg-secondary);
   overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
