@@ -13,23 +13,25 @@ export default function Header({ session }: HeaderProps) {
 
     return (
         <header className={styles.header}>
-            <a href="/" className={styles.logo}>
-                <h1>NoteHub</h1>
-            </a>
             <div className={styles.content}>
-                {session ?
-                    <a href={`/${userName || ""}`} className={styles.userName}>
-                        <Image
-                            src={session?.user?.image || ""}
-                            alt={`${session?.user?.name} profile image`}
-                            width={50}
-                            height={50}
-                            className={styles.userImage}
-                        />
-                    </a>
-                    :
-                    <LoginButton />
-                }
+                <a href="/" className={styles.logo}>
+                    <h1>NoteHub</h1>
+                </a>
+                <div className={styles.right}>
+                    {session ?
+                        <a href={`/${userName || ""}`}>
+                            <Image
+                                src={session?.user?.image || ""}
+                                alt={`${session?.user?.name} profile image`}
+                                width={50}
+                                height={50}
+                                className={styles.userImage}
+                            />
+                        </a>
+                        :
+                        <LoginButton />
+                    }
+                </div>
             </div>
         </header>
     );

@@ -1,6 +1,6 @@
 .button {
     height: 40px;
-    padding: 10px 20px;
+    padding: 2px 16px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,11 +10,16 @@
     font-size: 16px;
     font-weight: 500;
     border-radius: 6px;
-    border: 1px solid var(--background);
+    background-color: var(--bg-secondary);
+    color: var(--fg-primary);
+    border: 1px solid var(--accent-light);
+    transition: all 0.2s ease;
     cursor: pointer;
 
     &.primary {
-        background-color: #2b2e2f;
+        &:hover {
+            border: 1px solid var(--accent);
+        }
     }
 
     &.secondary {
@@ -22,28 +27,25 @@
     }
 
     &.tool {
-        background-color: var(--background);
         padding: 4px;
         width: 40px;
         height: 40px;
-        border-radius: 6px;
-        transition: all 0.2s ease;
-
-        .icon {
-            filter: invert();
-            opacity: 0.8;
-        }
-
         &:hover {
-            filter: brightness(0.9);
+            border: 1px solid var(--accent);
         }
-
+        
         &.loading {
             .icon {
                 animation: loading 1.5s linear infinite;
             }
         }
     }
+}
+
+.icon {
+    width: 18px;
+    filter: invert();
+    opacity: 0.95;
 }
 
 @keyframes loading {

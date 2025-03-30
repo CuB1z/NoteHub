@@ -1,23 +1,61 @@
 
 .header {
+    width: 100%;
     position: fixed;
     top: 0;
-    max-width: 1200px;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
     padding: 12px 16px;
 
     .content {
+        width: 100%;
+        max-width: 1200px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .right {
         display: flex;
         align-items: center;
         justify-content: space-between;
 
         .userImage {
-            width: 50px;
-            height: 50px;
-            border-radius: 8px;
+            width: 40px;
+            height: 40px;
+            border-radius: 999999px;
             object-fit: cover;
+            border: 1px solid var(--accent);
+            transition: all 0.2s ease;
+
+            &:hover {
+                cursor: pointer;
+                transform: rotate(-20deg);
+            }
         }
+    }
+
+    background: transparent;
+    animation: on-scroll 0.3s linear both;
+    animation-timeline: scroll();
+    animation-range: 0 250px;
+    border-bottom: 1px solid transparent;
+}
+
+@keyframes on-scroll {
+    0% {
+        backdrop-filter: blur(0px);
+        background: transparent;
+        border-bottom: 1px solid transparent;
+        padding-bottom: 18px;
+    }
+
+    100% {
+        backdrop-filter: blur(10px);
+        background: rgba(0, 0, 0, 0.3);
+        padding-bottom: 12px;
+        border-bottom-color: var(--accent-light);
     }
 }

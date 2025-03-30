@@ -7,7 +7,8 @@ import Button from "@/components/buttons/Button";
 export default function LoginButton() {
     return (
         <Button
-            label="Login with GitHub"
+            icon="/assets/icons/github.svg"
+            label="Sign In"
             onClick={() => signIn("github")}
             variant="primary"
         />

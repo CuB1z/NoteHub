@@ -19,13 +19,7 @@ export default function Button({
     label, alt, isLink, href, onClick, disabled,
     variant, icon, iconPosition, status
 }: ButtonProps) {
-    const customStyles = `
-        ${styles.button}
-        ${styles[variant]}
-        ${iconPosition ? styles[iconPosition] : ""}
-        ${disabled ? styles.disabled : ""}
-        ${status ? styles[status] : ""}
-    `;
+    const customStyles = `${styles.button} ${styles[variant]} ${iconPosition ? styles[iconPosition] : ""} ${disabled ? styles.disabled : ""} ${status ? styles[status] : ""}`;
 
     const handleClick = () => {
         if (disabled) return;
