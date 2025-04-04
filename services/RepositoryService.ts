@@ -1,6 +1,7 @@
 import { FileNode } from "@/types/FileNode";
-import { parseMarkdown } from "./MarkdownService";
+import { parseMarkdown } from "../lib/markdownParser";
 import { FileContent } from "@/types/FileContent";
+import { fetchData } from "@/lib/fetchData";
 
 const BASE_GITHUB_API_URL = "https://api.github.com/repos";
 
@@ -20,15 +21,16 @@ export async function getRepoStructure({ githubOwner, githubRepo, authToken, pat
     const url = `${BASE_GITHUB_API_URL}/${githubOwner}/${githubRepo}/contents/${path}`;
 
     try {
-        const headers = generateHeaders(authToken ?? null);
-        const response = await fetch(url, { headers });
+        const items = await fetchData<any>({
+            url: url,
+            authToken: authToken,
+            responseType: "JSON"
+        })
 
-        if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
-
-        const items = await response.json();
         let structure: FileNode[] = [];
 
         for (let item of items) {
+            console.log(item);
             // Skip hidden files
             if (item.name.startsWith(".")) continue;
 
@@ -70,23 +72,23 @@ export async function getFileContent({ githubOwner, githubRepo, authToken, path 
     const url = `${BASE_GITHUB_API_URL}/${githubOwner}/${githubRepo}/contents/${path}`;
 
     try {
-        const headers = generateHeaders(authToken ?? null);
-        const response = await fetch(url, { headers });
+        const response = await fetchData<any>({
+            url: url,
+            authToken: authToken,
+            responseType: "JSON"
+        });
         
-        if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
-
-        const fileData = await response.json();
-        
-        const fileContentResponse = await fetch(fileData.download_url, { headers });
-        if (!fileContentResponse.ok) throw new Error(`GitHub API error: ${fileContentResponse.status}`);
-
-        const content = await fileContentResponse.text();
+        const fileContentResponse = await fetchData<string>({
+            url: response.download_url,
+            authToken: authToken,
+            responseType: "TEXT"
+        });
 
         // Parse file metadata and content
-        const parsedFile = parseMarkdown(content);
+        const parsedFile = parseMarkdown(fileContentResponse);
 
         return {
-            name: fileData.name,
+            name: response.name,
             frontmatter: parsedFile.frontmatter,
             content: parsedFile.content,
         };
@@ -94,12 +96,4 @@ export async function getFileContent({ githubOwner, githubRepo, authToken, path 
         console.error("Error fetching file content from GitHub: ", url, error);
         throw new Error(`Failed to fetch file content from GitHub: ${url}`);
     }
-}
-
-function generateHeaders(authToken: string | null): Record<string, string> {
-    const headers: Record<string, string> = {};
-    if (authToken) {
-        headers["Authorization"] = `Bearer ${authToken}`;
-    }
-    return headers;
 }

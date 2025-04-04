@@ -8,13 +8,20 @@ interface MarkdownLink {
     text: string;
 }
 
+interface ParsedData {
+    frontmatter: Record<string, any> | null,
+    content: string | null
+}
+
 /**
  * Parses a Markdown file and extracts its frontmatter metadata and content.
  * 
  * @param {string} markdownContent - The Markdown content as a string.
  * @returns {Object} An object containing the frontmatter and content.
  */
-export function parseMarkdown(markdownContent: string) {
+export function parseMarkdown(markdownContent: string | null): ParsedData {
+    if (!markdownContent) return { frontmatter: null, content: null };
+    
     const { data: frontmatter, content: content} = matter(markdownContent);
     const parsedContent = parseMarkdownContent(content);
 
