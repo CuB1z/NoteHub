@@ -9,16 +9,17 @@
     text-decoration: none;
     font-size: 16px;
     font-weight: 500;
-    border-radius: 6px;
+    border-radius: 4px;
     background-color: var(--bg-secondary);
-    color: var(--fg-primary);
+    color: var(--accent);
     border: 1px solid var(--accent-light);
-    transition: all 0.2s ease;
     cursor: pointer;
+    transition: all 0.2s ease;
 
     &.primary {
         &:hover {
             border: 1px solid var(--accent);
+            scale: 1.05;
         }
     }
 
