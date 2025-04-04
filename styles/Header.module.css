@@ -9,6 +9,11 @@
     justify-content: center;
     padding: 12px 16px;
 
+    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.3);
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--accent-light);
+
     .content {
         width: 100%;
         max-width: 1200px;
@@ -35,27 +40,5 @@
                 transform: rotate(-20deg);
             }
         }
-    }
-
-    background: transparent;
-    animation: on-scroll 0.3s linear both;
-    animation-timeline: scroll();
-    animation-range: 0 250px;
-    border-bottom: 1px solid transparent;
-}
-
-@keyframes on-scroll {
-    0% {
-        backdrop-filter: blur(0px);
-        background: transparent;
-        border-bottom: 1px solid transparent;
-        padding-bottom: 18px;
-    }
-
-    100% {
-        backdrop-filter: blur(10px);
-        background: rgba(0, 0, 0, 0.3);
-        padding-bottom: 12px;
-        border-bottom-color: var(--accent-light);
     }
 }
