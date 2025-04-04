@@ -1,8 +1,8 @@
 import { LRUCache } from "lru-cache";
 
 const cache = new LRUCache<string, any>({
-  max: 1000,
-  ttl: 1000 * 60 * 15,
+  max: 10000,
+  ttl: 1000 * 60 * 60,
 });
 
 interface fetchProps {
