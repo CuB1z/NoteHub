@@ -1,9 +1,8 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import { FileTree } from "@/components/FileTree";
-import { fetchData } from "@/lib/fetchData";
-import { FileNode } from "@/types/FileNode";
 import Layout from "@/layouts/Layout";
+import { getRepoStructure } from "@/services/RepositoryService";
 
 interface PageProps {
     params: {
@@ -17,15 +16,15 @@ export default async function RepositoryPage(context: PageProps) {
 	const session = await getServerSession(authOptions);
 	const fullPath = `${params.name}/${params.repo}`;
 
-	const nodes = await fetchData<FileNode[]>(
-		`http://localhost:5000/api/v1/repositories/${fullPath}`,
-		session?.accessToken as string
-	)
-
+	const repoStructure = await getRepoStructure({
+		githubOwner: params.name,
+		githubRepo: params.repo,
+		authToken: session?.accessToken as string
+	});
 	
 	return (
 		<Layout session={session}>
-			<FileTree nodes={nodes} basePath={fullPath} />
+			<FileTree nodes={repoStructure} basePath={fullPath} />
 		</Layout>
 	);
 }

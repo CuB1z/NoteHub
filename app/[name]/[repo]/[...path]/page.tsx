@@ -5,6 +5,7 @@ import { fetchData } from "@/lib/fetchData";
 import { ContentResponse } from "@/types/ContentResponse";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
 import Layout from "@/layouts/Layout";
+import { getFileContent } from "@/services/RepositoryService";
 
 interface PageProps {
     params: {
@@ -23,14 +24,16 @@ export default async function DynamicPathPage(context: PageProps) {
         redirect(`/${params.name}/${params.repo}`);
     }
 
-    const response = await fetchData<ContentResponse>(
-        `http://localhost:5000/api/v1/repositories/${fullPath}`,
-        session?.accessToken as string,
-    );
+    const fileContent = await getFileContent({
+        githubOwner: params.name,
+        githubRepo: params.repo,
+        authToken: session?.accessToken,
+        path: params.path.join("/")
+    })
 
     return (
         <Layout session={session}>
-            <MarkdownRenderer markdown={response?.content || ""} />
+            <MarkdownRenderer {...fileContent} />
         </Layout>
     );
 }
