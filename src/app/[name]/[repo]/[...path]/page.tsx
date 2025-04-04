@@ -1,11 +1,9 @@
-import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { fetchData } from "@/lib/fetchData";
-import { ContentResponse } from "@/types/ContentResponse";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
 import Layout from "@/layouts/Layout";
 import { getFileContent } from "@/services/RepositoryService";
+import { redirect } from "next/navigation";
 
 interface PageProps {
     params: {
@@ -24,16 +22,20 @@ export default async function DynamicPathPage(context: PageProps) {
         redirect(`/${params.name}/${params.repo}`);
     }
 
-    const fileContent = await getFileContent({
-        githubOwner: params.name,
-        githubRepo: params.repo,
-        authToken: session?.accessToken,
-        path: params.path.join("/")
-    })
+    try {
+        const fileContent = await getFileContent({
+            githubOwner: params.name,
+            githubRepo: params.repo,
+            authToken: session?.accessToken,
+            path: params.path.join("/")
+        })
 
-    return (
-        <Layout session={session}>
-            <MarkdownRenderer {...fileContent} />
-        </Layout>
-    );
+        return (
+            <Layout session={session}>
+                <MarkdownRenderer {...fileContent} />
+            </Layout>
+        );
+    } catch (error) {
+        redirect(`/${params.name}/${params.repo}`);
+    }
 }

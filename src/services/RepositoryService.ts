@@ -19,6 +19,8 @@ interface RepoOptions {
  */
 export async function getRepoStructure({ githubOwner, githubRepo, authToken, path = "" }: RepoOptions): Promise<FileNode[]> {
     const url = `${BASE_GITHUB_API_URL}/${githubOwner}/${githubRepo}/contents/${path}`;
+    console.log("Fetching repo structure from GitHub: ", url);
+    console.log("Auth token: ", authToken);
 
     try {
         const items = await fetchData<any>({
@@ -26,6 +28,8 @@ export async function getRepoStructure({ githubOwner, githubRepo, authToken, pat
             authToken: authToken,
             responseType: "JSON"
         })
+
+        console.log("Fetched items: ", items);
 
         let structure: FileNode[] = [];
 
