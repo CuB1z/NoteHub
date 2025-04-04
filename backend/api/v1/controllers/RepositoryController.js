@@ -8,10 +8,12 @@ async function getRepositoryStructure(req, res) {
         githubOwner: req.params.owner || "CuB1z",
         githubRepo: req.params.repo || "Obsidian-Notes",
         path: req.query.path || "",
-        headers: {
-            "Authorization": authToken ? `Bearer ${authToken}` : null
-        }
+        headers: {}
     };
+
+    if (authToken != "undefined") {
+        repoData.headers["Authorization"] = `Bearer ${authToken}`;
+    }
 
     try {
         const data = await RepositoryService.getRepoStructure(repoData);
@@ -29,10 +31,12 @@ async function getFileContent(req, res) {
         githubOwner: req.params.owner || "CuB1z",
         githubRepo: req.params.repo || "Obsidian-Notes",
         path: req.params.path || "",
-        headers: {
-            "Authorization": authToken ? `Bearer ${authToken}` : null
-        }
+        headers: {}
     };
+
+    if (authToken != "undefined") {
+        repoData.headers["Authorization"] = `Bearer ${authToken}`;
+    }
 
     try {
         const data = await RepositoryService.getFileContent(repoData);
