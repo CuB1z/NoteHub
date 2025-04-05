@@ -2,8 +2,11 @@ import { authOptions } from "./api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 
 import Layout from "@/layouts/Layout";
-import SearchBar from "@/components/SearchBar";
-import Hero from "@/components/Hero";
+import Hero from "@/components/sections/Hero";
+import Features from "@/components/sections/Features";
+import Working from "@/components/sections/Working";
+import Examples from "@/components/sections/Examples";
+import Cta from "@/components/sections/Cta";
 
 export default async function Home() {
 	const session = await getServerSession(authOptions);
@@ -11,6 +14,10 @@ export default async function Home() {
 	return (
 		<Layout session={session}>
 			<Hero />
+			<Features />
+			<Working />
+			<Examples />
+			<Cta />
 		</Layout>
 	)
 }
