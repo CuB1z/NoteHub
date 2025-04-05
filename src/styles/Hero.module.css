@@ -18,8 +18,9 @@
     }
 
     .description {
-        max-width: 672px;
+        max-width: 744px;
         font-size: 18px;
+        font-weight: 500;
         line-height: 1.6;
         letter-spacing: 0.5px;
         color: var(--fg-secondary);
