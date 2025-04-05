@@ -27,11 +27,12 @@ const features = [
 
 export default function Features() {
     return (
-        <div id="features" className={styles.features}>
+        <section id="features" className={styles.features}>
             <SectionHeader
                 title="Everything You Need for Your Notes"
                 description="Our platform provides all the tools you need to visualize and interact with your notes stored in GitHub."
                 tag="Powerful Features"
+                style="DARK"
             />
             <div className={styles.featuresList}>
                 {features.map((feature, index) => (
@@ -44,6 +45,6 @@ export default function Features() {
                     </div>
                 ))}
             </div>
-        </div>
+        </section>
     );
 }

@@ -1,5 +1,6 @@
 
 .header {
+    position: relative;
     width: 100%;
     position: fixed;
     top: 0;
@@ -13,6 +14,7 @@
     background: rgba(0, 0, 0, 0.3);
     padding-bottom: 12px;
     border-bottom: 1px solid var(--accent-light);
+    z-index: 1000;
 
     .content {
         width: 100%;

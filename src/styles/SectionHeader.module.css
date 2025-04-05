@@ -15,6 +15,14 @@
         border-radius: 99999px;
         background-color: var(--bg-primary);
         margin-bottom: 12px;
+
+        &.dark {
+            background-color: var(--bg-primary);
+        }
+
+        &.light {
+            background-color: var(--bg-secondary);
+        }
     }
 
     .title {
