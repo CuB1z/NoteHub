@@ -37,7 +37,9 @@
 
             &:hover {
                 cursor: pointer;
-                transform: rotate(-20deg);
+                transform: rotate(5deg);
+                scale: 1.05;
+                box-shadow: 0 0 5px var(--accent-light);
             }
         }
     }
