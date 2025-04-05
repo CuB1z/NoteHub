@@ -1,5 +1,6 @@
 "use client";
 import styles from "@/styles/SearchBar.module.css";
+import { Search, Loader } from "lucide-react";
 
 import { useState } from "react";
 import Button from "@/components/buttons/Button";
@@ -14,11 +15,11 @@ export default function SearchBar() {
     }
 
     const handleSearchSubmit = () => {
-        setIsLoading(true);
-        setIcon("/assets/icons/loader.svg");
-
         const realUrl = search.split("https://github.com/")[1]
         if (realUrl) {
+            setIsLoading(true);
+            setIcon("/assets/icons/loader.svg");
+
             window.location.href = `/${realUrl}`;
         }
     }
@@ -35,10 +36,11 @@ export default function SearchBar() {
             <Button
                 variant="tool"
                 alt="Search"
-                icon={icon}
                 onClick={() => handleSearchSubmit()}
                 status={isLoading ? "loading" : undefined}
-            />
+            >
+                {isLoading ? <Loader className="icon" /> : <Search className="icon" />}
+            </Button>
         </div>
     );
 }

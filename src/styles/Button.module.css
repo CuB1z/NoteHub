@@ -45,9 +45,9 @@
 }
 
 .icon {
-    width: 18px;
-    filter: invert();
-    opacity: 0.95;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @keyframes loading {

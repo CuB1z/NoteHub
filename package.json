@@ -11,6 +11,7 @@
   "dependencies": {
     "gray-matter": "^4.0.3",
     "lru-cache": "^11.1.0",
+    "lucide-react": "^0.487.0",
     "marked": "^15.0.7",
     "marked-gfm-heading-id": "^4.1.1",
     "marked-katex-extension": "^5.1.4",

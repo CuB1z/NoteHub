@@ -1,4 +1,4 @@
-import styles from "@/styles/Hero.module.css"
+import styles from "@/styles/sections/Hero.module.css"
 import SearchBar from "@/components/SearchBar"
 
 export default function Hero() {

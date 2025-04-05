@@ -1,10 +1,10 @@
 "use client";
 
 import styles from "@/styles/Button.module.css";
+import { JSX } from "react";
 
 interface ButtonProps {
     label?: string;
-    icon?: string;
     alt?: string;
     iconPosition?: "left" | "right";
     isLink?: boolean;
@@ -13,11 +13,12 @@ interface ButtonProps {
     disabled?: boolean;
     status?: "loading" | "success" | "error";
     variant: "primary" | "secondary" | "tool";
+    children?: JSX.Element | JSX.Element[];
 }
 
 export default function Button({
-    label, alt, isLink, href, onClick, disabled,
-    variant, icon, iconPosition, status
+    label, isLink, href, onClick, disabled,
+    variant, iconPosition, status, children
 }: ButtonProps) {
     const customStyles = `${styles.button} ${styles[variant]} ${iconPosition ? styles[iconPosition] : ""} ${disabled ? styles.disabled : ""} ${status ? styles[status] : ""}`;
 
@@ -28,7 +29,7 @@ export default function Button({
 
     const content = (
         <>
-            {icon && <img src={icon} alt={alt} className={styles.icon} />}
+            {children && <div className={styles.icon}>{children}</div>}
             {label && <span className={styles.label}>{label}</span>}
         </>
     )

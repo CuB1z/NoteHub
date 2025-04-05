@@ -2,7 +2,7 @@
   --bg-primary: #282828;
   --bg-secondary: #212121;
   --accent: #b8bb26;
-  --accent-light: #98971a;
+  --accent-light: #494919;
   --fg-primary: #ddded8;
   --fg-secondary: #bbc0c7;
   --primary: #fabd2f;
@@ -11,6 +11,8 @@
   --warning: #fe8019;
   --info: #83a598;
   --success: #b8bb26;
+
+  --section-x-padding: 32px;
 }
 
 body {
@@ -38,6 +40,14 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+.icon {
+  color: var(--fg-primary);
+
+  &.accent {
+    color: var(--accent);
+  }
 }
 
 @media (prefers-color-scheme: dark) {
