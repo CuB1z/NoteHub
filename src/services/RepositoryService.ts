@@ -114,7 +114,7 @@ export async function getRepoData({ githubOwner, githubRepo, authToken }: RepoOp
         });
 
         return {
-            name: response.name.replace(/-/g, " "),
+            name: response.name,
             description: response.description,
             url: response.svn_url,
             stars: response.stargazers_count,

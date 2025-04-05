@@ -21,7 +21,7 @@ const steps = [
 
 export default function Working() {
     return (
-        <section className={styles.working}>
+        <section id="working" className={styles.working}>
             <SectionHeader
                 title="How it Works"
                 description="Get started in seconds with our straightforward process."

@@ -9,7 +9,7 @@ interface ButtonProps {
     iconPosition?: "left" | "right";
     isLink?: boolean;
     href?: string;
-    onClick: () => void;
+    onClick?: () => void;
     disabled?: boolean;
     status?: "loading" | "success" | "error";
     variant: "primary" | "secondary" | "tool";
@@ -24,7 +24,7 @@ export default function Button({
 
     const handleClick = () => {
         if (disabled) return;
-        onClick();
+        onClick?.();
     }
 
     const content = (
