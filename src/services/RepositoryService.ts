@@ -6,7 +6,7 @@ import { RepositoryData } from "@/types/RepositoryData";
 
 const BASE_GITHUB_API_URL = "https://api.github.com/repos";
 
-interface RepoOptions {
+export interface RepoOptions {
     githubOwner: string;
     githubRepo: string;
     authToken?: string | null;

@@ -8,6 +8,7 @@ interface ButtonProps {
     alt?: string;
     iconPosition?: "left" | "right";
     isLink?: boolean;
+    target?: "_blank" | "_self";
     href?: string;
     onClick?: () => void;
     disabled?: boolean;
@@ -18,7 +19,7 @@ interface ButtonProps {
 
 export default function Button({
     label, isLink, href, onClick, disabled,
-    variant, iconPosition, status, children
+    variant, iconPosition, status, children, target
 }: ButtonProps) {
     const customStyles = `${styles.button} ${styles[variant]} ${iconPosition ? styles[iconPosition] : ""} ${disabled ? styles.disabled : ""} ${status ? styles[status] : ""}`;
 
@@ -36,7 +37,7 @@ export default function Button({
 
     if (isLink) {
         return (
-            <a className={customStyles} href={href}>
+            <a className={customStyles} href={href} target={target}>
                 {content}
             </a>
         );
