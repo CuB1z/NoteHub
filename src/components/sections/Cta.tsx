@@ -20,7 +20,7 @@ export default function Cta() {
     ];
 
     return (
-        <div className={styles.cta}>
+        <section id="cta" className={styles.cta}>
             <div className={styles.content}>
                 <div className={styles.left}>
                     <SectionHeader
@@ -56,6 +56,6 @@ export default function Cta() {
                     ))}
                 </div>
             </div>
-        </div>
+        </section>
     );
 }

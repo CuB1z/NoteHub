@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import SessionWrapper from "@/components/wrappers/SessionWrapper";
 
 import { Session } from "next-auth";
-import Footer from "@/components/Footer";
+import Footer from "@/components/sections/Footer";
 
 type Props = {
     session: Session | null;

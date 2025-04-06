@@ -1,6 +1,7 @@
 "use client";
 
 import styles from "@/styles/Button.module.css";
+import Link from "next/link";
 import { JSX } from "react";
 
 interface ButtonProps {
@@ -13,7 +14,7 @@ interface ButtonProps {
     onClick?: () => void;
     disabled?: boolean;
     status?: "loading" | "success" | "error";
-    variant: "primary" | "secondary" | "tool";
+    variant: "primary" | "secondary" | "tool" | "toolUnbordered" | "text";
     children?: JSX.Element | JSX.Element[];
 }
 
@@ -37,9 +38,9 @@ export default function Button({
 
     if (isLink) {
         return (
-            <a className={customStyles} href={href} target={target}>
+            <Link href={href || "#"} target={target} className={customStyles}>
                 {content}
-            </a>
+            </Link>
         );
     }
 

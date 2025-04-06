@@ -48,6 +48,36 @@
             }
         }
     }
+
+    &.toolUnbordered {
+        padding: 4px;
+        width: 40px;
+        height: 40px;
+        border: none;
+        background-color: transparent;
+        color: var(--fg-primary);
+
+        &:hover {
+            color: var(--accent);
+            scale: 1.1;
+        }
+    }
+
+    &.text {
+        display: inline-block;
+        padding: 0;
+        width: min-content;
+        height: auto;
+        border: none;
+        background-color: transparent;
+        color: var(--fg-secondary);
+        font-size: 14px;
+        text-align: left;
+
+        &:hover {
+            color: var(--accent);
+        }
+    }
 }
 
 .icon {
