@@ -1,11 +1,11 @@
 
 :root {
-    --bg-color: #282828;
-    --fg-color: #ebdbb2;
+    --bg-color: var(--bg-primary);
+    --fg-color: var(--fg-primary);
     --accent-color: #83a598;
-    --highlight-color: #d79921;
-    --border-color: #3c3836;
-    --link-color: #8ec07c;
+    --highlight-color: var(--accent);
+    --border-color: var(--accent-light);
+    --link-color: var(--fg-secondary);
     --code-bg-color: #3c3836;
     --code-fg-color: #fdf4c1;
     --blockquote-bg-color: #32302f;
@@ -19,6 +19,13 @@
     max-width: 800px;
     margin: 0 auto;
     border-radius: 8px;
+
+    *[align="center"] {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
 
     h1,
     h2,
@@ -41,6 +48,8 @@
     }
 
     p {
+        display: flex;
+        gap: 4px;
         font-size: 1rem;
         margin-bottom: 1rem;
     }
