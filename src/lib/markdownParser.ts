@@ -21,8 +21,8 @@ interface ParsedData {
  */
 export function parseMarkdown(markdownContent: string | null): ParsedData {
     if (!markdownContent) return { frontmatter: null, content: null };
-    
-    const { data: frontmatter, content: content} = matter(markdownContent);
+
+    const { data: frontmatter, content: content } = matter(markdownContent);
     const parsedContent = parseMarkdownContent(content);
 
     return {
@@ -30,6 +30,8 @@ export function parseMarkdown(markdownContent: string | null): ParsedData {
         content: parsedContent,
     };
 }
+
+const originalRenderer = new marked.Renderer();
 
 function createCustomRenderer() {
     const renderer = new marked.Renderer();
@@ -59,31 +61,6 @@ function createCustomRenderer() {
         }
     }
 
-    renderer.paragraph = ({ tokens }: { tokens: any[] }) => {
-        const hasInlineImage = tokens.some(token => {
-            if (token.type === "image") return true;
-            if (token.type === "link" && token.text.startsWith("![")) return true;
-            return false;
-        });
-
-        if (hasInlineImage) {
-            const cleanedTokens = tokens.filter(token => token.type !== "br");
-            const images = cleanedTokens.map(token => {
-                if (token.type === "link") {
-                    return renderer.link({ href: token.href, text: token.text } as Tokens.Link);
-                }
-
-                if (token.type === "image") {
-                    return `<img src="${token.href}" alt="${token.text}" />`;
-                }
-            }).join('');
-
-            return `<p class="inline-images">${images}</p>`;
-        }
-
-        return `<p>${tokens.map(token => token.text).join(' ')}</p>`;
-    }
-
     return renderer;
 }
 
@@ -93,7 +70,7 @@ function parseMarkdownContent(markdown: string): string {
     marked.use(markedKatex({ throwOnError: false }));
     marked.use(gfmHeadingId());
     marked.use({ renderer });
-    
+
     return marked.parse(markdown, {
         async: false,
         breaks: true,

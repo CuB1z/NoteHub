@@ -2,13 +2,15 @@
 :root {
     --bg-color: var(--bg-primary);
     --fg-color: var(--fg-primary);
-    --accent-color: #83a598;
+    --accent-color: var(--accent);
+    --bold-color: var(--accent);
+    --em-color: var(--accent-secondary);
     --highlight-color: var(--accent);
     --border-color: var(--accent-light);
     --link-color: var(--fg-secondary);
-    --code-bg-color: #3c3836;
-    --code-fg-color: #fdf4c1;
-    --blockquote-bg-color: #32302f;
+    --code-bg-color: var(--bg-secondary);
+    --code-fg-color: var(--fg-secondary);
+    --blockquote-bg-color: var(--bg-primary-light);
 }
 
 .markdown-body {
@@ -20,11 +22,8 @@
     margin: 0 auto;
     border-radius: 8px;
 
-    *[align="center"] {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
+    * {
+        font-weight: 500;
     }
 
     h1,
@@ -37,19 +36,25 @@
 
     h1 {
         font-size: 2.5rem;
+        font-weight: 1000;
     }
 
     h2 {
         font-size: 2rem;
+        font-weight: 700;
     }
 
     h3 {
         font-size: 1.75rem;
+        font-weight: 700;
+    }
+
+    h4 {
+        font-size: 1.5rem;
     }
 
     p {
-        display: flex;
-        gap: 4px;
+        text-align: justify;
         font-size: 1rem;
         margin-bottom: 1rem;
     }
@@ -81,13 +86,13 @@
     }
 
     strong {
-        font-weight: bold;
-        color: var(--accent-color);
+        font-weight: 700;
+        color: var(--bold-color);
     }
 
     em {
         font-style: italic;
-        color: var(--accent-color);
+        color: var(--em-color);
     }
 
     img {
@@ -104,6 +109,7 @@
         border-radius: 4px;
         font-family: 'Fira Code', monospace;
         font-size: 0.875rem;
+        font-weight: 500;
         overflow-x: auto;
         color: var(--code-fg-color);
         margin-bottom: 12px;
@@ -167,15 +173,5 @@
         display: block;
         margin: 1em 0;
         text-align: center;
-    }
-
-    .inline-images {
-        width: 100%;
-        height: auto;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        gap: 12px;
-        flex-wrap: wrap;
     }
 }
