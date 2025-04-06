@@ -6,7 +6,7 @@
     align-items: center;
     justify-content: center;
     background-color: var(--bg-secondary);
-    padding: calc(var(--section-x-padding) * 2) var(--section-x-padding);
+    padding: calc(var(--section-x-padding) * 4) var(--section-x-padding);
 
     .featuresList {
         width: 100%;

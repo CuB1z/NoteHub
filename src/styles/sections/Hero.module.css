@@ -5,8 +5,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     padding: calc(var(--section-x-padding) * 4) var(--section-x-padding);
+    animation: fade-in 1.5s ease-in-out;
 
     .h1 {
         font-size: 64px;
@@ -51,3 +52,15 @@
         }
     }
 }
+
+@keyframes fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+  
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
