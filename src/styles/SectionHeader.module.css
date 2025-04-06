@@ -40,4 +40,17 @@
         text-align: center;
         max-width: 744px;
     }
+
+    &.left {
+        text-align: left;
+        align-items: flex-start;
+
+        .title {
+            text-align: left;
+        }
+
+        .description {
+            text-align: left;
+        }
+    }
 }

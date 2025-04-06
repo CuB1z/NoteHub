@@ -25,7 +25,13 @@
     }
 
     &.secondary {
-        background-color: #f44336;
+        background-color: var(--bg-primary);
+        color: var(--fg-primary);
+        border: 1px solid var(--accent-light);
+
+        &:hover {
+            border: 1px solid var(--accent);
+        }
     }
 
     &.tool {
