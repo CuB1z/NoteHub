@@ -4,6 +4,7 @@ import { StarIcon, Github, Search } from "lucide-react";
 
 import { RepositoryData } from "@/types/RepositoryData";
 import Button from "../buttons/Button";
+import Link from "next/link";
 
 export default function Examples({ examples }: { examples: RepositoryData[] }) {
 
@@ -34,9 +35,9 @@ export default function Examples({ examples }: { examples: RepositoryData[] }) {
                             <p className={styles.description}>{repo.description}</p>
                             <div className={styles.cardFooter}>
 
-                                <div className={styles.avatarContainer}>
+                                <Link href={`/${repo.owner.name}`} className={styles.avatarContainer}>
                                     <img src={repo.owner.avatar} alt={`${repo.owner.name} avatar`} className={styles.avatar} />
-                                </div>
+                                </Link>
                                 <div className={styles.right}>
                                     <Button
                                         variant="tool"

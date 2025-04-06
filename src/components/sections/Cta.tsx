@@ -6,7 +6,7 @@ import Button from "@/components/buttons/Button";
 import LoginButton from "@/components/buttons/LoginButton";
 import SectionHeader from "../SectionHeader";
 
-export default function Cta() {
+export default function Cta({ isLoggedIn }: { isLoggedIn?: boolean }) {
     const icons = [Puzzle, Pyramid, Book, Pi, GitBranch, GitGraph];
 
     // [Right, Top, Rotation]
@@ -38,7 +38,7 @@ export default function Cta() {
                             href="/about"
                             target="_self"
                         />
-                        <LoginButton />
+                        {!isLoggedIn &&  <LoginButton />}
                     </div>
                 </div>
                 <div className={styles.right}>

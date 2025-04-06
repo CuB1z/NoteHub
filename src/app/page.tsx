@@ -31,7 +31,7 @@ export default async function Home() {
 			<Features />
 			<Working />
 			<Examples examples={examples}/>
-			<Cta />
+			<Cta isLoggedIn={!!session} />
 		</Layout>
 	)
 }
