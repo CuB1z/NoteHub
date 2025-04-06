@@ -23,24 +23,27 @@ export default function SearchBar() {
             window.location.href = `/${realUrl}`;
         }
     }
-    
+
     return (
         <div className={styles.searchBar}>
-            <input
-                type="text"
-                value={search}
-                onChange={handleSearchChange}
-                placeholder="https://github.com/CuB1z/Obsidian-Notes"
-                className={styles.input}
-            />
-            <Button
-                variant="tool"
-                alt="Search"
-                onClick={() => handleSearchSubmit()}
-                status={isLoading ? "loading" : undefined}
-            >
-                {isLoading ? <Loader className="icon" /> : <Search className="icon" />}
-            </Button>
+            <span className={styles.title}>GitHub Repository</span>
+            <div className={styles.content}>
+                <input
+                    type="text"
+                    value={search}
+                    onChange={handleSearchChange}
+                    placeholder="https://github.com/CuB1z/Obsidian-Notes"
+                    className={styles.input}
+                />
+                <Button
+                    variant="tool"
+                    alt="Search"
+                    onClick={() => handleSearchSubmit()}
+                    status={isLoading ? "loading" : undefined}
+                >
+                    {isLoading ? <Loader className="icon" /> : <Search className="icon" />}
+                </Button>
+            </div>
         </div>
     );
 }
