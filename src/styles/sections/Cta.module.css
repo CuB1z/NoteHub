@@ -59,10 +59,27 @@
             flex-direction: column;
             align-items: center;
             gap: 32px;
+
+            .left .ctaButtons {
+                justify-content: center;
+            }
         }
 
         .right {
             display: none;
+        }
+    }
+}
+
+@media (max-width: 544px) {
+    .cta {
+        .content {
+            .left .ctaButtons {
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 16px;
+            }
         }
     }
 }

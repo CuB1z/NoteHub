@@ -58,8 +58,6 @@
 
 @media (max-width: 600px) {
     .hero {
-        padding: 32px 8px;
-
         .h1 {
             font-size: 34px;
             line-height: 1.4;
