@@ -4,6 +4,7 @@ import MarkdownRenderer from "@/components/MarkdownRenderer";
 import Layout from "@/layouts/Layout";
 import { getFileContent } from "@/services/RepositoryService";
 import { redirect } from "next/navigation";
+import BreadCrumb from "@/components/BreadCrumb";
 
 interface PageProps {
     params: {
@@ -32,7 +33,14 @@ export default async function DynamicPathPage(context: PageProps) {
 
         return (
             <Layout session={session}>
-                <MarkdownRenderer {...fileContent} />
+                <div>
+                    <BreadCrumb
+                        githubOwner={params.name}
+                        githubRepo={params.repo}
+                        path={params.path.join("/")}
+                    />
+                    <MarkdownRenderer {...fileContent} />
+                </div>
             </Layout>
         );
     } catch (error) {
