@@ -14,6 +14,8 @@ export default async function ProfilePage(context: PageProps) {
     const params = await context.params;
     const session = await getServerSession(authOptions);
     const isOwner = session?.userName === params.name;
+    console.log("Session:", session);
+    console.log("Is Owner:", isOwner);
 
     const userData = await getUserData({
         githubOwner: params.name,
@@ -22,7 +24,10 @@ export default async function ProfilePage(context: PageProps) {
 
     return (
         <Layout session={session}>
-            <Profile userData={userData} />
+            <Profile
+                userData={userData}
+                isOwner={isOwner}
+            />
         </Layout>
     );
 }

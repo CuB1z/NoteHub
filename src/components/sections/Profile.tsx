@@ -2,14 +2,16 @@ import styles from "@/styles/sections/Profile.module.css";
 
 import { UserData } from "@/types/UserData";
 import Image from "next/image";
-import Button from "../buttons/Button";
+import Button from "@/components/buttons/Button";
+import LogOutButton from "@/components/buttons/LogOutButton";
 import { Github, GitFork, UsersRound, Rss } from "lucide-react";
 
 interface ProfileProps {
     userData: UserData;
+    isOwner?: boolean;
 }
 
-export default function Profile({ userData }: ProfileProps) {
+export default function Profile({ userData, isOwner }: ProfileProps) {
     return (
         <section className={styles.profileSection}>
             <div className={styles.profile}>
@@ -34,13 +36,16 @@ export default function Profile({ userData }: ProfileProps) {
                             </p>
                         </div>
                     </div>
-                    <Button
-                        variant="primary"
-                        label="View on GitHub"
-                        isLink
-                        href={userData.profileUrl}
-                        target="_blank"
-                    ><Github className={styles.githubIcon} /></Button>
+                    {isOwner && <LogOutButton />}
+                    {!isOwner && (
+                        <Button
+                            variant="primary"
+                            label="View on GitHub"
+                            isLink
+                            href={userData.profileUrl}
+                            target="_blank"
+                        ><Github className={styles.githubIcon} /></Button>
+                    )}
                 </div>
                 <div className={styles.stats}>
                     <div className={styles.stat}>
