@@ -14,6 +14,11 @@ export interface RepoOptions {
     path?: string;
 }
 
+export interface UserOptions {
+    githubOwner: string;
+    authToken?: string | null;
+}
+
 /**
  * Fetches the structure of a repository from GitHub
  * @param options - The options for the request
@@ -139,7 +144,7 @@ export async function getRepoData({ githubOwner, githubRepo, authToken }: RepoOp
  * @param options - The options for the request
  * @returns The user data
  */
-export async function getUserData({ githubOwner, authToken }: RepoOptions): Promise<UserData> {
+export async function getUserData({ githubOwner, authToken }: UserOptions): Promise<UserData> {
     const url = `https://api.github.com/users/${githubOwner}`;
 
     try {
