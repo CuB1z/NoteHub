@@ -3,6 +3,7 @@ import { parseMarkdown } from "../lib/markdownParser";
 import { FileContent } from "@/types/FileContent";
 import { fetchData } from "@/lib/fetchData";
 import { RepositoryData } from "@/types/RepositoryData";
+import { UserData } from "@/types/UserData";
 
 const BASE_GITHUB_API_URL = "https://api.github.com/repos";
 
@@ -113,6 +114,8 @@ export async function getRepoData({ githubOwner, githubRepo, authToken }: RepoOp
             responseType: "JSON"
         });
 
+        console.log("Repository data: ", response);
+
         return {
             name: response.name,
             description: response.description,
@@ -128,5 +131,40 @@ export async function getRepoData({ githubOwner, githubRepo, authToken }: RepoOp
     } catch (error) {
         console.error("Error fetching repo data from GitHub: ", url, error);
         throw new Error(`Failed to fetch repository data from GitHub: ${url}`);
+    }
+}
+
+/**
+ * Fetches the user data from GitHub
+ * @param options - The options for the request
+ * @returns The user data
+ */
+export async function getUserData({ githubOwner, authToken }: RepoOptions): Promise<UserData> {
+    const url = `https://api.github.com/users/${githubOwner}`;
+
+    try {
+        const response = await fetchData<any>({
+            url: url,
+            authToken: authToken,
+            responseType: "JSON"
+        });
+
+        return {
+            id: response.id,
+            username: response.login,
+            name: response.name,
+            avatar: response.avatar_url,
+            profileUrl: response.html_url,
+            bio: response.bio,
+            location: response.location,
+            stats: {
+                repositories: response.public_repos,
+                followers: response.followers,
+                following: response.following,
+            }
+        };
+    } catch (error) {
+        console.error("Error fetching user data from GitHub: ", url, error);
+        throw new Error(`Failed to fetch user data from GitHub: ${url}`);
     }
 }
