@@ -9,7 +9,7 @@ export default function MarkdownRenderer({ name, frontmatter, content }: FileCon
             <span>{JSON.stringify(frontmatter)}</span>
             <div
                 className="markdown-body"
-                dangerouslySetInnerHTML={{ __html: content }}
+                dangerouslySetInnerHTML={{ __html: content || "" }}
             ></div>
         </>
     );

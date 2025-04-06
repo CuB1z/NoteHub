@@ -159,4 +159,14 @@
         margin: 1em 0;
         text-align: center;
     }
+
+    .inline-images {
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
 }

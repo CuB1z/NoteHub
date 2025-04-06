@@ -1,5 +1,5 @@
 import matter from "gray-matter";
-import { marked } from "marked"
+import { marked, Token, Tokens } from "marked"
 import markedKatex from "marked-katex-extension";
 import { gfmHeadingId } from "marked-gfm-heading-id";
 
@@ -35,6 +35,15 @@ function createCustomRenderer() {
     const renderer = new marked.Renderer();
 
     renderer.link = ({ href, text }: MarkdownLink) => {
+        if (text.startsWith("![") && text.includes("](")) {
+            const imageMarkdown = text.match(/!\[(.*?)\]\((.*?)\)/);
+            if (imageMarkdown) {
+                const altText = imageMarkdown[1];
+                const imageUrl = imageMarkdown[2];
+                return `<a href="${href}" target="_blank" rel="noopener noreferrer"><img src="${imageUrl}" alt="${altText}" /></a>`;
+            }
+        }
+
         if (href.startsWith("http")) {
             return `<a href="${href}" target="_blank" rel="noopener noreferrer">${text}</a>`;
         } else if (href.startsWith("#")) {
@@ -50,6 +59,31 @@ function createCustomRenderer() {
         }
     }
 
+    renderer.paragraph = ({ tokens }: { tokens: any[] }) => {
+        const hasInlineImage = tokens.some(token => {
+            if (token.type === "image") return true;
+            if (token.type === "link" && token.text.startsWith("![")) return true;
+            return false;
+        });
+
+        if (hasInlineImage) {
+            const cleanedTokens = tokens.filter(token => token.type !== "br");
+            const images = cleanedTokens.map(token => {
+                if (token.type === "link") {
+                    return renderer.link({ href: token.href, text: token.text } as Tokens.Link);
+                }
+
+                if (token.type === "image") {
+                    return `<img src="${token.href}" alt="${token.text}" />`;
+                }
+            }).join('');
+
+            return `<p class="inline-images">${images}</p>`;
+        }
+
+        return `<p>${tokens.map(token => token.text).join(' ')}</p>`;
+    }
+
     return renderer;
 }
 
@@ -59,6 +93,7 @@ function parseMarkdownContent(markdown: string): string {
     marked.use(markedKatex({ throwOnError: false }));
     marked.use(gfmHeadingId());
     marked.use({ renderer });
+    
     return marked.parse(markdown, {
         async: false,
         breaks: true,
