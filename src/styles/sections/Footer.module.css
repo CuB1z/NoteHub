@@ -61,6 +61,7 @@
     font-weight: 500;
     color: var(--fg-primary);
     text-align: center;
+    opacity: 0.8;
 }
 
 .author {

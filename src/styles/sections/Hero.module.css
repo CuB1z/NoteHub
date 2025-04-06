@@ -1,5 +1,5 @@
-
 .hero {
+    position: relative;
     width: 100%;
     min-height: 82vh;
     display: flex;
@@ -7,7 +7,7 @@
     align-items: center;
     justify-content: flex-start;
     padding: calc(var(--section-x-padding) * 4) var(--section-x-padding);
-    animation: fade-in 1.5s ease-in-out;
+    animation: fade-in 0.5s ease-in-out;
 
     .h1 {
         font-size: 64px;
@@ -28,6 +28,26 @@
         color: var(--fg-secondary);
         text-align: center;
         margin-bottom: 64px;
+    }
+}
+
+.scroll {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    color: var(--fg-primary);
+    font-size: 18px;
+    font-weight: 500;
+    opacity: 0.8;
+
+    .scrollIcon {
+        animation: scrolling 1s ease-in-out infinite alternate;
     }
 }
 
@@ -55,12 +75,22 @@
 
 @keyframes fade-in {
     0% {
-      opacity: 0;
-      transform: translateY(-10px);
+        opacity: 0;
+        transform: translateY(-10px);
     }
-  
+
     100% {
-      opacity: 1;
-      transform: translateY(0);
+        opacity: 1;
+        transform: translateY(0);
     }
-  }
+}
+
+@keyframes scrolling {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-10px);
+    }
+}
