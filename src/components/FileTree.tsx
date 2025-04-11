@@ -1,8 +1,8 @@
 "use client";
+import styles from "@/styles/FileTree.module.css";
 
 import { useState } from "react";
 import { FileNode } from "@/types/FileNode";
-import styles from "@/styles/FileTree.module.css";
 
 interface FileTreeProps {
 	basePath: string;
