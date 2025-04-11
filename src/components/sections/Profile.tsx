@@ -19,6 +19,7 @@ export default function Profile({ userData, isOwner }: ProfileProps) {
                     <div className={styles.userInfo}>
                         <div className={styles.avatarContainer}>
                             <Image
+                                loading="eager"
                                 src={userData.avatar}
                                 alt={userData.name || "Profile Image"}
                                 width={100}

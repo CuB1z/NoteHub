@@ -21,6 +21,7 @@ export default function Header({ session }: HeaderProps) {
                     {session ?
                         <a href={`/${userName || ""}`}>
                             <Image
+                                loading="eager"
                                 src={session?.user?.image || ""}
                                 alt={`${session?.user?.name} profile image`}
                                 width={50}
