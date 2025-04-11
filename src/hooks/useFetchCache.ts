@@ -1,49 +1,10 @@
+import {
+    EXPIRATION_TIME,
+    clearStoredCache,
+    getStoredCache,
+    updateStoredCache
+} from "@/services/CacheService";
 import { useState, useEffect } from "react";
-
-const STORAGE_KEY = "__notehub_cache__";
-const EXPIRATION_TIME = 1000 * 60 * 60;
-
-/**
- * Get stored cache from localStorage.
- * @returns {any} The stored cache object.
-*/
-function getStoredCache(): any {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    return stored ? JSON.parse(stored) : {};
-}
-
-/**
- * Set cache to localStorage.
- * @param {any} cache - The cache object to store.
-*/
-function setStoredCache(cache: any): void {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(cache));
-}
-
-/**
- * Update cache in localStorage.
- * @param {string} url - URL to update in the cache.
- * @param {any} newData - The new data to store in the cache.
- */
-function updateStoredCache(url: string, newData: any): void {
-    const cache = getStoredCache();
-    cache[url] = { data: newData, timestamp: Date.now() };
-    setStoredCache(cache);
-}
-
-/**
- * Clear cache from localStorage.
- * @param {string} [url] - URL to clear from the cache. If not provided, clears all cache.
-*/
-function clearStoredCache(url?: string): void {
-    if (url) {
-        const cache = getStoredCache();
-        delete cache[url];
-        setStoredCache(cache);
-    } else {
-        localStorage.removeItem(STORAGE_KEY);
-    }
-}
 
 /**
  * Hook used to fetch data from an API and cache the response in localStorage.
