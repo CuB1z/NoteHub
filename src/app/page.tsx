@@ -7,7 +7,11 @@ import Features from "@/components/sections/Features";
 import Working from "@/components/sections/Working";
 import Examples from "@/components/sections/Examples";
 import Cta from "@/components/sections/Cta";
+
 import { RepoOptions } from "@/services/RepositoryService";
+import { metadata as meta } from "@/config/metadata";
+
+export const metadata = meta;
 
 const exampleRepos: RepoOptions[] = [
 	{ githubOwner: "midudev", githubRepo: "eloquent-javascript-es" },

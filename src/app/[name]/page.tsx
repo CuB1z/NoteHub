@@ -1,11 +1,22 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import ProfileClient from "@/components/clients/ProfileClient";
-import Layout from "@/layouts/Layout";
+import { Metadata } from "next";
 import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { metadata as meta, APP_NAME } from "@/config/metadata";
+
+import Layout from "@/layouts/Layout";
+import ProfileClient from "@/components/clients/ProfileClient";
 
 interface PageProps {
     params: Promise<{ name: string }>,
 };
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+    const { name } = await params;
+    return {
+        ...meta,
+        title: `${APP_NAME} - ${name}`
+    }
+}
 
 export default async function ProfilePage(context: PageProps) {
     const params = await context.params;
