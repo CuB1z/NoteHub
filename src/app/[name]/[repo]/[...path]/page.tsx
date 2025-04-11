@@ -7,43 +7,43 @@ import { redirect } from "next/navigation";
 import BreadCrumb from "@/components/BreadCrumb";
 
 interface PageProps {
-    params: {
+    params: Promise<{
         name: string;
         repo: string;
-        path: string[]
-    };
+        path: string[];
+    }>;
 };
 
 export default async function DynamicPathPage(context: PageProps) {
-    const params = await context.params;
+    const { name, repo, path } = await context.params;
     const session = await getServerSession(authOptions);
-    const fullPath = `${params.name}/${params.repo}/${params.path.join("/")}`;
+    const fullPath = `${name}/${repo}/${path.join("/")}`;
 
     if (!fullPath.endsWith(".md")) {
-        redirect(`/${params.name}/${params.repo}`);
+        redirect(`/${name}/${repo}`);
     }
 
     try {
         const fileContent = await getFileContent({
-            githubOwner: params.name,
-            githubRepo: params.repo,
+            githubOwner: name,
+            githubRepo: repo,
             authToken: session?.accessToken,
-            path: params.path.join("/")
+            path: path.join("/")
         })
 
         return (
             <Layout session={session}>
                 <div>
                     <BreadCrumb
-                        githubOwner={params.name}
-                        githubRepo={params.repo}
-                        path={params.path.join("/")}
+                        githubOwner={name}
+                        githubRepo={repo}
+                        path={path.join("/")}
                     />
                     <MarkdownRenderer {...fileContent} />
                 </div>
             </Layout>
         );
     } catch (error) {
-        redirect(`/${params.name}/${params.repo}`);
+        redirect(`/${name}/${repo}`);
     }
 }
