@@ -1,26 +1,29 @@
-import { getServerSession } from "next-auth";
-import { getFileContent, getRepoData, getRepoStructure } from "@/services/RepositoryService";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { getFileContent } from "@/services/RepositoryService";
+import { getAuthToken } from "@/services/RequestService";
 
 interface CustomRequest {
-    params: { name: string, repo: string, path: string[] };
+    params: Promise<{ name: string, repo: string, path: string[] }>;
     query?: { [key: string]: string };
 }
 
-export async function GET(req: Request, { params, query }: CustomRequest) {
-    const session = await getServerSession(authOptions);
+export async function GET(req: Request, { params }: CustomRequest) {
+    const authToken = getAuthToken(req.headers);
     const { name, repo, path } = await params;
 
-    if (!name || !repo) {
-        return new Response("Missing parameters", { status: 400 });
+    if (!name || !repo || !path) {
+        return new Response(JSON.stringify({ error: "Missing parameters" }), { status: 400 });
     }
 
-    const fileContent = await getFileContent({
-        githubOwner: name,
-        githubRepo: repo,
-        authToken: session?.accessToken,
-        path: path.join("/"),
-    })
-
-    return new Response(JSON.stringify(fileContent), { status: 200 });
+    try {
+        const fileContent = await getFileContent({
+            githubOwner: name,
+            githubRepo: repo,
+            authToken: authToken,
+            path: path.join("/"),
+        })
+    
+        return new Response(JSON.stringify(fileContent), { status: 200 });
+    } catch (error) {
+        return new Response(JSON.stringify({ error: "Failed to fetch file content" }), { status: 500 });
+    }
 }

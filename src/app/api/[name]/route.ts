@@ -1,23 +1,23 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getUserData } from "@/services/RepositoryService";
+import { getAuthToken } from "@/services/RequestService";
 
 interface CustomRequest {
-    params: { name: string };
+    params: Promise<{ name: string }>;
     query?: { [key: string]: string };
 }
 
-export async function GET(req: Request, { params, query }: CustomRequest) {
-    const session = await getServerSession(authOptions);
+export async function GET(req: Request, { params }: CustomRequest) {
+    const authToken = getAuthToken(req.headers);
     const { name } = await params;
 
-    const userData = await getUserData({
-        githubOwner: name,
-        authToken: session?.accessToken,
-    });
+    try {
+        const userData = await getUserData({
+            githubOwner: name,
+            authToken: authToken,
+        });
 
-    console.log("Session:", session);
-    console.log("User Data:", userData);
-
-    return new Response(JSON.stringify(userData), { status: 200 });
+        return new Response(JSON.stringify(userData), { status: 200 });
+    } catch (error) {
+        return new Response(JSON.stringify({ error: "Failed to fetch user data" }), { status: 500 });
+    }
 }
