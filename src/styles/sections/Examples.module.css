@@ -238,3 +238,13 @@
         transform: translateX(100%);
     }
 }
+
+@media (max-width: 744px) {
+    .examples .content {
+        grid-template-columns: 1fr;
+    }
+
+    .examples .item {
+        margin-bottom: 16px;
+    }
+}
