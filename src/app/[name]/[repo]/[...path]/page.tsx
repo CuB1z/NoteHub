@@ -1,10 +1,8 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import MarkdownRenderer from "@/components/MarkdownRenderer";
 import Layout from "@/layouts/Layout";
-import { getFileContent } from "@/services/RepositoryService";
 import { redirect } from "next/navigation";
-import BreadCrumb from "@/components/BreadCrumb";
+import FileClient from "@/components/clients/FileClient";
 
 interface PageProps {
     params: Promise<{
@@ -23,27 +21,14 @@ export default async function DynamicPathPage(context: PageProps) {
         redirect(`/${name}/${repo}`);
     }
 
-    try {
-        const fileContent = await getFileContent({
-            githubOwner: name,
-            githubRepo: repo,
-            authToken: session?.accessToken,
-            path: path.join("/")
-        })
-
-        return (
-            <Layout session={session}>
-                <div>
-                    <BreadCrumb
-                        githubOwner={name}
-                        githubRepo={repo}
-                        path={path.join("/")}
-                    />
-                    <MarkdownRenderer {...fileContent} />
-                </div>
-            </Layout>
-        );
-    } catch (error) {
-        redirect(`/${name}/${repo}`);
-    }
+    return (
+        <Layout session={session}>
+            <FileClient
+                githubOwner={name}
+                githubRepo={repo}
+                authToken={session?.accessToken}
+                path={path}
+            />
+        </Layout>
+    );
 }

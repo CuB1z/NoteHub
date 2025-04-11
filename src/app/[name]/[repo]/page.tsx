@@ -1,9 +1,6 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
-import { FileTree } from "@/components/FileTree";
 import Layout from "@/layouts/Layout";
-import { getRepoStructure } from "@/services/RepositoryService";
-import { redirect } from "next/navigation";
 import RepoClient from "@/components/clients/RepoClient";
 
 interface PageProps {
