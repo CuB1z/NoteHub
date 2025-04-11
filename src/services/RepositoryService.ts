@@ -34,6 +34,8 @@ export async function getRepoStructure({ githubOwner, githubRepo, authToken, pat
             responseType: "JSON"
         })
 
+        if (!Array.isArray(items) || !items) throw new Error("Invalid response from GitHub API.");
+
         let structure: FileNode[] = [];
 
         for (let item of items) {
@@ -64,8 +66,12 @@ export async function getRepoStructure({ githubOwner, githubRepo, authToken, pat
         return structure;
 
     } catch (error) {
-        console.error("Error fetching repo structure from GitHub: ", url, error);
-        throw new Error(`Failed to fetch repository structure from GitHub: ${url}`);
+        const msg = error instanceof Error
+            ? error.message
+            : "Failed to fetch repository structure from GitHub: " + url;
+
+        console.error(msg);
+        throw new Error(msg);
     }
 }
 
@@ -83,12 +89,16 @@ export async function getFileContent({ githubOwner, githubRepo, authToken, path 
             authToken: authToken,
             responseType: "JSON"
         });
+
+        if (!response.download_url) throw new Error("File not found or no download URL available.");
         
         const fileContentResponse = await fetchData<string>({
             url: response.download_url,
             authToken: authToken,
             responseType: "TEXT"
         });
+
+        if (!fileContentResponse) throw new Error("File content is empty.");
 
         // Parse file metadata and content
         const parsedFile = parseMarkdown(fileContentResponse);
@@ -99,8 +109,12 @@ export async function getFileContent({ githubOwner, githubRepo, authToken, path 
             content: parsedFile.content,
         };
     } catch (error) {
-        console.error("Error fetching file content from GitHub: ", url, error);
-        throw new Error(`Failed to fetch file content from GitHub: ${url}`);
+        const msg = error instanceof Error
+            ? error.message
+            : "Failed to fetch file content from GitHub: " + url;
+
+        console.error(msg);
+        throw new Error(msg);
     }
 }
 
@@ -119,6 +133,8 @@ export async function getRepoData({ githubOwner, githubRepo, authToken }: RepoOp
             responseType: "JSON"
         });
 
+        if (!response) throw new Error("No response received from GitHub API.");
+    
         return {
             name: response.name,
             description: response.description,
@@ -132,8 +148,12 @@ export async function getRepoData({ githubOwner, githubRepo, authToken }: RepoOp
             }
         }
     } catch (error) {
-        console.error("Error fetching repo data from GitHub: ", url, error);
-        throw new Error(`Failed to fetch repository data from GitHub: ${url}`);
+        const msg = error instanceof Error
+            ? error.message
+            : "Failed to fetch repository data from GitHub: " + url;
+
+        console.error(msg);
+        throw new Error(msg);
     }
 }
 
@@ -152,6 +172,8 @@ export async function getUserData({ githubOwner, authToken }: UserOptions): Prom
             responseType: "JSON"
         });
 
+        if (!response) throw new Error("No response received from GitHub API.");
+
         return {
             id: response.id,
             username: response.login,
@@ -167,7 +189,11 @@ export async function getUserData({ githubOwner, authToken }: UserOptions): Prom
             }
         };
     } catch (error) {
-        console.error("Error fetching user data from GitHub: ", url, error);
-        throw new Error(`Failed to fetch user data from GitHub: ${url}`);
+        const msg = error instanceof Error
+            ? error.message
+            : "Failed to fetch user data from GitHub: " + url;
+        
+        console.error(msg);
+        throw new Error(msg);
     }
 }
