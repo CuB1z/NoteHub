@@ -119,8 +119,6 @@ export async function getRepoData({ githubOwner, githubRepo, authToken }: RepoOp
             responseType: "JSON"
         });
 
-        console.log("Repository data: ", response);
-
         return {
             name: response.name,
             description: response.description,
