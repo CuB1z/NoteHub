@@ -64,7 +64,7 @@
     }
 
     &.text {
-        display: inline-block;
+        display: inline-flex;
         padding: 0;
         width: auto;
         height: auto;
@@ -80,7 +80,15 @@
     }
 }
 
+.label {
+    color: inherit;
+}
+
 .icon {
+    --size: 16px;
+    color: inherit;
+    width: var(--size);
+    height: var(--size);
     display: flex;
     justify-content: center;
     align-items: center;
