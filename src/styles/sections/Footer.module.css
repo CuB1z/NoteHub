@@ -1,8 +1,8 @@
 .footer {
     width: 100%;
     background-color: var(--bg-secondary);
-    margin-top: calc(var(--section-x-padding) * 2);
     padding: 48px 0;
+    border-top: 1px solid var(--accent-light);
 }
 
 .container {
