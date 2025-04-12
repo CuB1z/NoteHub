@@ -5,6 +5,7 @@ import { metadata as meta, APP_NAME } from "@/config/metadata";
 
 import ContentLayout from "@/layouts/ContentLayout";
 import RepoClient from "@/components/clients/RepoClient";
+import FileClient from "@/components/clients/FileClient";
 
 interface PageProps {
 	params: Promise<{ name: string; repo: string }>;
@@ -20,28 +21,29 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function RepositoryPage(context: PageProps) {
-	const params = await context.params;
+	const { name, repo } = await context.params;
 	const session = await getServerSession(authOptions);
-	const fullPath = `${params.name}/${params.repo}`;
+	const fullPath = `${name}/${repo}`;
 
 	return (
 		<ContentLayout
-			disabled
 			session={session}
 			fileTree={
 				<RepoClient
-					githubOwner={params.name}
-					githubRepo={params.repo}
+					githubOwner={name}
+					githubRepo={repo}
 					authToken={session?.accessToken as string}
 					basePath={fullPath}
 				/>
 			}
 			toc={null}
 		>
-			<>
-				<h1>{`${params.name}/${params.repo}`}</h1>
-				<p>View the notes repository from GitHub</p>
-			</>
+			<FileClient
+				githubOwner={name}
+				githubRepo={repo}
+				authToken={session?.accessToken}
+				path={[""]}
+			/>
 		</ContentLayout>
 	);
 }

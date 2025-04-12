@@ -1,5 +1,7 @@
 "use client";
 
+import styles from "@/styles/FileClient.module.css";
+
 import useFetchCache from "@/hooks/useFetchCache";
 import { FileContent } from "@/types/FileContent";
 import BreadCrumb from "@/components/BreadCrumb";
@@ -24,7 +26,7 @@ export default function FileClient({ githubOwner, githubRepo, authToken, path }:
     if (!data) return <div>No data found</div>;
 
     return (
-        <div>
+        <div className={styles.container} >
             <BreadCrumb
                 githubOwner={githubOwner}
                 githubRepo={githubRepo}
