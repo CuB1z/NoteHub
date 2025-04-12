@@ -19,3 +19,46 @@
     padding-top: 120px;
     gap: 50px;
 }
+
+.gridLayout {
+    width: 100%;
+    max-width: var(--max-width);
+    display: grid;
+    grid-template-columns: 250px 1fr 250px;
+    gap: 8px;
+    padding: 0;
+    height: 100%;
+}
+
+.sidebar {
+    padding-right: 12px;
+    overflow-y: auto;
+}
+
+.mainContent {
+    min-width: 0;
+
+    .disabledOverlay {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 8px;
+        padding: 12px 16px;
+        padding-bottom: 48px;
+        background-color: var(--bg-secondary);
+        border-radius: 8px;  
+    }
+}
+
+.toc {
+    padding-left: 1rem;
+    overflow-y: auto;
+}
+
+@media (max-width: 1264px) {
+    .gridLayout {
+        padding: 0 16px;
+    }
+}

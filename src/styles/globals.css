@@ -43,6 +43,7 @@ body {
   scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: var(--accent-light) var(--bg-secondary);
+  color: var(--fg-primary);
 }
 
 a {

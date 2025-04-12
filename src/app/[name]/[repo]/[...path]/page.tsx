@@ -6,6 +6,8 @@ import { metadata as meta, APP_NAME } from "@/config/metadata";
 
 import Layout from "@/layouts/Layout";
 import FileClient from "@/components/clients/FileClient";
+import ContentLayout from "@/layouts/ContentLayout";
+import RepoClient from "@/components/clients/RepoClient";
 
 interface PageProps {
     params: Promise<{
@@ -35,13 +37,24 @@ export default async function DynamicPathPage(context: PageProps) {
     }
 
     return (
-        <Layout session={session}>
+        <ContentLayout
+            session={session}
+            fileTree={
+                <RepoClient
+                    githubOwner={name}
+                    githubRepo={repo}
+                    authToken={session?.accessToken as string}
+                    basePath={`${name}/${repo}`}
+                />
+            }
+            toc={null}
+        >
             <FileClient
                 githubOwner={name}
                 githubRepo={repo}
                 authToken={session?.accessToken}
                 path={path}
             />
-        </Layout>
-    );
+        </ContentLayout>
+    )
 }

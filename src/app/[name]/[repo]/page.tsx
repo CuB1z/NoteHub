@@ -3,19 +3,19 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { metadata as meta, APP_NAME } from "@/config/metadata";
 
-import Layout from "@/layouts/Layout";
+import ContentLayout from "@/layouts/ContentLayout";
 import RepoClient from "@/components/clients/RepoClient";
 
 interface PageProps {
 	params: Promise<{ name: string; repo: string }>;
-};
+}
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
 	const { name, repo } = await params;
 	return {
 		...meta,
 		title: `${APP_NAME} - ${name}/${repo}`,
-		description: `View the ${repo} notes repository from ${name} on GitHub`
+		description: `View the ${repo} notes repository from ${name} on GitHub`,
 	};
 }
 
@@ -25,13 +25,23 @@ export default async function RepositoryPage(context: PageProps) {
 	const fullPath = `${params.name}/${params.repo}`;
 
 	return (
-		<Layout session={session}>
-			<RepoClient
-				githubOwner={params.name}
-				githubRepo={params.repo}
-				authToken={session?.accessToken as string}
-				basePath={fullPath}
-			/>
-		</Layout>
+		<ContentLayout
+			disabled
+			session={session}
+			fileTree={
+				<RepoClient
+					githubOwner={params.name}
+					githubRepo={params.repo}
+					authToken={session?.accessToken as string}
+					basePath={fullPath}
+				/>
+			}
+			toc={null}
+		>
+			<>
+				<h1>{`${params.name}/${params.repo}`}</h1>
+				<p>View the notes repository from GitHub</p>
+			</>
+		</ContentLayout>
 	);
 }
