@@ -3,9 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { metadata as meta, APP_NAME } from "@/config/metadata";
 
-import ContentLayout from "@/layouts/ContentLayout";
-import RepoClient from "@/components/clients/RepoClient";
-import FileClient from "@/components/clients/FileClient";
+import ContentClient from "@/components/clients/ContentClient";
 
 interface PageProps {
 	params: Promise<{ name: string; repo: string }>;
@@ -26,24 +24,11 @@ export default async function RepositoryPage(context: PageProps) {
 	const fullPath = `${name}/${repo}`;
 
 	return (
-		<ContentLayout
+		<ContentClient
 			session={session}
-			fileTree={
-				<RepoClient
-					githubOwner={name}
-					githubRepo={repo}
-					authToken={session?.accessToken as string}
-					basePath={fullPath}
-				/>
-			}
-			toc={null}
-		>
-			<FileClient
-				githubOwner={name}
-				githubRepo={repo}
-				authToken={session?.accessToken}
-				path={[""]}
-			/>
-		</ContentLayout>
+			name={name}
+			repo={repo}
+			fullPath={fullPath}
+		/>
 	);
 }

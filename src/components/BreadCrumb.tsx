@@ -4,7 +4,7 @@ import { RepoOptions } from "@/services/RepositoryService";
 import { Home } from "lucide-react";
 import Button from "./buttons/Button";
 
-export default function BreadCrumb({ githubOwner, githubRepo, path }: RepoOptions) {
+export default function BreadCrumb({ githubOwner, githubRepo }: RepoOptions) {
     return (
         <div className={styles.breadcrumb}>
             <Button
@@ -19,13 +19,6 @@ export default function BreadCrumb({ githubOwner, githubRepo, path }: RepoOption
                 variant="text"
                 isLink
                 href={`/${githubOwner}/${githubRepo}`}
-            />
-            <span>{`${">"}`}</span>
-            <Button
-                label={path}
-                variant="text"
-                isLink
-                href={`/${githubOwner}/${githubRepo}/${path}`}
             />
         </div>
     );

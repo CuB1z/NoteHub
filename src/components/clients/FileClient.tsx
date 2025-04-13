@@ -30,7 +30,6 @@ export default function FileClient({ githubOwner, githubRepo, authToken, path }:
             <BreadCrumb
                 githubOwner={githubOwner}
                 githubRepo={githubRepo}
-                path={path.join("/")}
             />
             <MarkdownRenderer {...data} />
         </div>

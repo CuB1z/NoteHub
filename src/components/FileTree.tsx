@@ -13,6 +13,11 @@ interface FileTreeProps {
 export function FileTree({ nodes, basePath, recursive }: FileTreeProps) {
 	const [openFolders, setOpenFolders] = useState<Record<string, boolean>>({});
 
+	const handleFileClick = (path: string) => {
+		const event = new CustomEvent("fileClick", { detail: { path } });
+		window.dispatchEvent(event);
+	}
+
 	const toggleFolder = (path: string) => {
 		setOpenFolders((prev) => ({
 			...prev,
@@ -32,10 +37,10 @@ export function FileTree({ nodes, basePath, recursive }: FileTreeProps) {
 					{nodes.map((node) => (
 						<li key={node.path} className={styles.treeItem}>
 							{node.type === "file" ? (
-								<a href={`/${basePath}/${node.name}`} className={styles.file}>
+								<span className={styles.file} onClick={() => handleFileClick?.(node.path)}>
 									<FileIcon className={styles.icon} size={16} />
 									<span className={styles.fileName}>{node.name}</span>
-								</a>
+								</span>
 							) : (
 								<>
 									<span
