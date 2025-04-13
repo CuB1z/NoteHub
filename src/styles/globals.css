@@ -12,6 +12,7 @@
   --section-x-padding: 32px;
   --max-width: 1200px;
   --header-height: 70px;
+  --default-margin-top: 24px;
 }
 
 ::selection {
