@@ -85,7 +85,7 @@
 }
 
 .icon {
-    --size: 16px;
+    --size: 24px;
     color: inherit;
     width: var(--size);
     height: var(--size);

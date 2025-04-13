@@ -37,14 +37,19 @@ export default function ContentClient({ name, repo, session, fullPath }: Content
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
         const path = params.get("path");
+        console.log("Path from URL:", path);
         if (path) {
             setSelectedFile(path);
+        } else {
+            setSelectedFile("");
         }
     }, []);
 
     return (
         <ContentLayout
             session={session}
+            githubOwner={name}
+            githubRepo={repo}
             fileTree={
                 <RepoClient
                     githubOwner={name}

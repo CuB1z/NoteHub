@@ -4,7 +4,6 @@ import styles from "@/styles/FileClient.module.css";
 
 import useFetchCache from "@/hooks/useFetchCache";
 import { FileContent } from "@/types/FileContent";
-import BreadCrumb from "@/components/BreadCrumb";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
 
 interface FileClientProps {
@@ -27,10 +26,6 @@ export default function FileClient({ githubOwner, githubRepo, authToken, path }:
 
     return (
         <div className={styles.container} >
-            <BreadCrumb
-                githubOwner={githubOwner}
-                githubRepo={githubRepo}
-            />
             <MarkdownRenderer {...data} />
         </div>
     );
