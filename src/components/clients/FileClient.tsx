@@ -2,9 +2,12 @@
 
 import styles from "@/styles/FileClient.module.css";
 
+import { notFound } from "next/navigation";
 import useFetchCache from "@/hooks/useFetchCache";
 import { FileContent } from "@/types/FileContent";
+
 import MarkdownRenderer from "@/components/MarkdownRenderer";
+import Loader from "@/components/skeletons/Loader";
 
 interface FileClientProps {
     githubOwner: string;
@@ -20,9 +23,9 @@ function buildUrl(githubOwner: string, githubRepo: string, path: string[]): stri
 export default function FileClient({ githubOwner, githubRepo, authToken, path }: FileClientProps) {
     const { data, loading, error } = useFetchCache<FileContent>(buildUrl(githubOwner, githubRepo, path), authToken);
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>{error}</div>;
-    if (!data) return <div>No data found</div>;
+    if (error) return notFound();
+    if (loading) return <Loader />;
+    if (!data) return notFound();
 
     return (
         <div className={styles.container} >

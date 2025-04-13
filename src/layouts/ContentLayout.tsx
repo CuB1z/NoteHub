@@ -19,7 +19,10 @@ export default function ContentLayout({ session, children, fileTree, toc, disabl
     return (
         <Layout session={session}>
             <div className={styles.gridLayout}>
-                <aside className={styles.sidebar}>{fileTree}</aside>
+                <aside className={styles.sidebar}>
+                    <h2 className={styles.sidebarTitle}>Knowledge</h2>
+                    {fileTree}
+                </aside>
                 <main className={styles.mainContent}>
                     <BreadCrumb githubOwner={githubOwner} githubRepo={githubRepo} />
                     {disabled ? (

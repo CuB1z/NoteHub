@@ -32,7 +32,6 @@ export function FileTree({ nodes, basePath, recursive }: FileTreeProps) {
 	const renderTree = (nodes: FileNode[]) => {
 		return (
 			<div className={`${styles.tree} ${recursive ? styles.recursive : ""}`}>
-				{!recursive && <h2 className={styles.title}>Knowledge</h2>}
 				<ul className={styles.treeList}>
 					{nodes.map((node) => (
 						<li key={node.path} className={styles.treeItem}>

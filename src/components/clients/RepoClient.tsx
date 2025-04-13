@@ -1,9 +1,11 @@
 "use client";
 
+import { notFound } from "next/navigation";
 import useFetchCache from "@/hooks/useFetchCache";
 import { RepositoryResponse } from "@/types/RepositoryResponse";
-import { FileTree } from "../FileTree";
-import { notFound, redirect } from "next/navigation";
+
+import { FileTree } from "@/components/FileTree";
+import Loader from "@/components/skeletons/Loader";
 
 interface RepoClientProps {
     githubOwner: string;
@@ -19,12 +21,9 @@ function buildUrl(githubOwner: string, githubRepo: string): string {
 export default function RepoClient({ githubOwner, githubRepo, authToken, basePath }: RepoClientProps) {
     const { data, loading, error } = useFetchCache<RepositoryResponse>(buildUrl(githubOwner, githubRepo), authToken);
 
-    if (error) {
-        return notFound();
-    }
-    
-    if (loading) return <div>Loading...</div>;
-    if (!data) return <div>No data available</div>;
+    if (error) return notFound();
+    if (loading) return <Loader />;    
+    if (!data) return notFound();
 
     return <FileTree nodes={data.repoStructure} basePath={basePath} />;
 }

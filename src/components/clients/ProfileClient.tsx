@@ -18,8 +18,8 @@ function buildUrl(githubOwner: string): string {
 export default function ProfileClient({ githubOwner, authToken, isOwner }: ProfileClientProps) {
     const { data, loading, error } = useFetchCache<UserData>(buildUrl(githubOwner), authToken);
 
-    if (loading) return <ProfileSkeleton />;
     if (error) return <div>{error}</div>;
+    if (loading) return <ProfileSkeleton />;
     if (!data) return <div>No data available</div>;
 
     return <Profile userData={data} isOwner={isOwner} />;
