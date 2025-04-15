@@ -82,6 +82,7 @@ export async function getRepoStructure({ githubOwner, githubRepo, authToken, pat
  */
 export async function getFileContent({ githubOwner, githubRepo, authToken, path = "" }: RepoOptions): Promise<FileContent> {
     const url = `${BASE_GITHUB_API_URL}/${githubOwner}/${githubRepo}/contents/${path}`;
+    const baseUrl = `${githubOwner}/${githubRepo}`;
 
     try {
         const response = await fetchData<any>({
@@ -101,7 +102,7 @@ export async function getFileContent({ githubOwner, githubRepo, authToken, path 
         if (!fileContentResponse) throw new Error("File content is empty.");
 
         // Parse file metadata and content
-        const parsedFile = parseMarkdown(fileContentResponse);
+        const parsedFile = parseMarkdown(fileContentResponse, baseUrl);
 
         return {
             name: response.name,

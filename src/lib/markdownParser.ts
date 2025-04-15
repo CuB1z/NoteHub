@@ -17,13 +17,14 @@ interface ParsedData {
  * Parses a Markdown file and extracts its frontmatter metadata and content.
  * 
  * @param {string} markdownContent - The Markdown content as a string.
+ * @param {string} baseUrl - The base URL for the repository.
  * @returns {Object} An object containing the frontmatter and content.
  */
-export function parseMarkdown(markdownContent: string | null): ParsedData {
+export function parseMarkdown(markdownContent: string | null, baseUrl: string): ParsedData {
     if (!markdownContent) return { frontmatter: null, content: null };
 
     const { data: frontmatter, content: content } = matter(markdownContent);
-    const parsedContent = parseMarkdownContent(content);
+    const parsedContent = parseMarkdownContent(content, baseUrl);
 
     return {
         frontmatter: frontmatter,
@@ -31,12 +32,11 @@ export function parseMarkdown(markdownContent: string | null): ParsedData {
     };
 }
 
-const originalRenderer = new marked.Renderer();
-
-function createCustomRenderer() {
+function createCustomRenderer(baseUrl: string) {
     const renderer = new marked.Renderer();
 
     renderer.link = ({ href, text }: MarkdownLink) => {
+        console.log("Link:", href, text);
         if (text.startsWith("![") && text.includes("](")) {
             const imageMarkdown = text.match(/!\[(.*?)\]\((.*?)\)/);
             if (imageMarkdown) {
@@ -57,15 +57,15 @@ function createCustomRenderer() {
 
             return `<a href="${newHref}">${text}</a>`;
         } else {
-            return `<a href="${href}">${text}</a>`;
+            return `<a href="/${baseUrl}?path=${encodeURIComponent(href)}">${text}</a>`;
         }
     }
 
     return renderer;
 }
 
-function parseMarkdownContent(markdown: string): string {
-    const renderer = createCustomRenderer();
+function parseMarkdownContent(markdown: string, baseUrl: string): string {
+    const renderer = createCustomRenderer(baseUrl);
 
     marked.use(markedKatex({ throwOnError: false }));
     marked.use(gfmHeadingId());
