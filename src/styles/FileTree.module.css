@@ -37,11 +37,13 @@
 }
 
 .treeItem {
-	margin: 0.5rem 0;
+	margin: 2px 0;
 }
 
 .file,
 .folder {
+    padding: 4px 6px;
+    border-radius: 4px;
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
@@ -50,6 +52,10 @@
 	transition: color 0.2s ease;
 	color: var(--fg-secondary);
 	text-decoration: none;
+
+    &:hover {
+        background-color: var(--bg-tertiary);
+    }
 }
 
 .file {
@@ -60,7 +66,8 @@
         white-space: nowrap;
     }
 
-    &:hover {
+    &.selected {
+        background-color: var(--bg-tertiary);
         color: var(--accent);
     }
 }

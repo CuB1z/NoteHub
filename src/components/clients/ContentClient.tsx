@@ -37,12 +37,9 @@ export default function ContentClient({ name, repo, session, fullPath }: Content
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
         const path = params.get("path");
-        console.log("Path from URL:", path);
-        if (path) {
-            setSelectedFile(path);
-        } else {
-            setSelectedFile("");
-        }
+        
+        if (path) setSelectedFile(path);
+        else setSelectedFile("");
     }, []);
 
     return (
@@ -56,6 +53,7 @@ export default function ContentClient({ name, repo, session, fullPath }: Content
                     githubRepo={repo}
                     authToken={session?.accessToken as string}
                     basePath={fullPath}
+                    selectedFile={selectedFile}
                 />
             }
             toc={null}

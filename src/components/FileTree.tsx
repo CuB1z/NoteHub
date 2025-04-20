@@ -8,9 +8,10 @@ interface FileTreeProps {
 	basePath: string;
 	nodes: FileNode[] | null;
 	recursive?: boolean;
+	selectedNode?: FileNode | null;
 }
 
-export function FileTree({ nodes, basePath, recursive }: FileTreeProps) {
+export function FileTree({ nodes, basePath, recursive, selectedNode }: FileTreeProps) {
 	const [openFolders, setOpenFolders] = useState<Record<string, boolean>>({});
 
 	const handleFileClick = (path: string) => {
@@ -36,7 +37,10 @@ export function FileTree({ nodes, basePath, recursive }: FileTreeProps) {
 					{nodes.map((node) => (
 						<li key={node.path} className={styles.treeItem}>
 							{node.type === "file" ? (
-								<span className={styles.file} onClick={() => handleFileClick?.(node.path)}>
+								<span
+									className={`${styles.file} ${selectedNode?.path === node.path ? styles.selected : ""}`}
+									onClick={() => handleFileClick?.(node.path)}
+								>
 									<FileIcon className={styles.icon} size={16} />
 									<span className={styles.fileName}>{node.name}</span>
 								</span>
@@ -58,6 +62,7 @@ export function FileTree({ nodes, basePath, recursive }: FileTreeProps) {
 											nodes={node.children}
 											basePath={`${basePath}/${node.name}`}
 											recursive
+											selectedNode={selectedNode}
 										/>
 									)}
 								</>
