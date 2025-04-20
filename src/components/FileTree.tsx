@@ -11,8 +11,27 @@ interface FileTreeProps {
 	selectedNode?: FileNode | null;
 }
 
+// Function to initialize open folders based on the selected node's path
+function initializeOpenFolders(node?: FileNode): Record<string, boolean> {
+	if (!node) return {};
+
+	const foldersTree = node.path.split("/").slice(0, -1);
+	const openFolders: Record<string, boolean> = {};
+
+	for (let i = 0; i < foldersTree.length; i++) {
+		const folderPath = foldersTree.slice(0, i + 1).join("/");
+		if (folderPath) {
+			openFolders[folderPath] = true;
+		}
+	}
+
+	return openFolders;
+}
+
 export function FileTree({ nodes, basePath, recursive, selectedNode }: FileTreeProps) {
-	const [openFolders, setOpenFolders] = useState<Record<string, boolean>>({});
+	const [openFolders, setOpenFolders] = useState<Record<string, boolean>>(
+		initializeOpenFolders(selectedNode || undefined)
+	);
 
 	const handleFileClick = (path: string) => {
 		const event = new CustomEvent("fileClick", { detail: { path } });
@@ -20,6 +39,7 @@ export function FileTree({ nodes, basePath, recursive, selectedNode }: FileTreeP
 	}
 
 	const toggleFolder = (path: string) => {
+		console.log("Toggling folder:", path);
 		setOpenFolders((prev) => ({
 			...prev,
 			[path]: !prev[path],
