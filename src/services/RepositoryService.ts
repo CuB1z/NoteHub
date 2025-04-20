@@ -108,6 +108,7 @@ export async function getFileContent({ githubOwner, githubRepo, authToken, path 
             name: response.name,
             frontmatter: parsedFile.frontmatter,
             content: parsedFile.content,
+            headings: parsedFile.headings,
         };
     } catch (error) {
         const msg = error instanceof Error

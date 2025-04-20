@@ -3,6 +3,8 @@ import styles from "@/styles/FileTree.module.css";
 import { useState } from "react";
 import { FileNode } from "@/types/FileNode";
 import { Folder, FolderOpen, File as FileIcon } from "lucide-react";
+import { CLICKED_FILE_EVENT } from "@/config/constants";
+import { ClickedFileEvent } from "@/types/event/ClickedFileEvent";
 
 interface FileTreeProps {
 	basePath: string;
@@ -34,9 +36,9 @@ export function FileTree({ nodes, basePath, recursive, selectedNode }: FileTreeP
 	);
 
 	const handleFileClick = (path: string) => {
-		const event = new CustomEvent("fileClick", { detail: { path } });
+		const event = new CustomEvent<ClickedFileEvent>(CLICKED_FILE_EVENT, { detail: { path } });
 		window.dispatchEvent(event);
-	}
+	};
 
 	const toggleFolder = (path: string) => {
 		console.log("Toggling folder:", path);

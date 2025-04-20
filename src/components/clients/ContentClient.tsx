@@ -5,6 +5,9 @@ import { useRouter } from "next/navigation";
 import ContentLayout from "@/layouts/ContentLayout";
 import RepoClient from "@/components/clients/RepoClient";
 import FileClient from "@/components/clients/FileClient";
+import TocClient from "@/components/clients/TocClient";
+import { CLICKED_FILE_EVENT } from "@/config/constants";
+import { ClickedFileEvent } from "@/types/event/ClickedFileEvent";
 
 interface ContentClientProps {
     name: string;
@@ -18,18 +21,18 @@ export default function ContentClient({ name, repo, session, fullPath }: Content
     const router = useRouter();
 
     useEffect(() => {
-        const handleFileClick = (event: CustomEvent) => {
-            const filePath = event.detail.path;
+        const handleFileClick = (event: CustomEvent<ClickedFileEvent>) => {
+            const { path: filePath } = event.detail;
             setSelectedFile(filePath);
             router.push(`/${name}/${repo}?path=${encodeURIComponent(filePath)}`);
         };
 
         // Set up a listener for the custom event
-        window.addEventListener("fileClick", handleFileClick as EventListener);
+        window.addEventListener(CLICKED_FILE_EVENT, handleFileClick as EventListener);
 
         // Clean up the event listener on component unmount
         return () => {
-            window.removeEventListener("fileClick", handleFileClick as EventListener);
+            window.removeEventListener(CLICKED_FILE_EVENT, handleFileClick as EventListener);
         };
     }, [name, repo, router]);
 
@@ -56,7 +59,7 @@ export default function ContentClient({ name, repo, session, fullPath }: Content
                     selectedFile={selectedFile}
                 />
             }
-            toc={null}
+            toc={<TocClient />}
         >
             <FileClient
                 githubOwner={name}
