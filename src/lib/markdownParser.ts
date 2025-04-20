@@ -2,6 +2,7 @@ import matter from "gray-matter";
 import { marked, Token, Tokens } from "marked"
 import markedKatex from "marked-katex-extension";
 import { gfmHeadingId } from "marked-gfm-heading-id";
+import { MarkdownHeading } from "@/types/MarkdownHeading";
 
 interface MarkdownLink {
     href: string;
@@ -10,7 +11,8 @@ interface MarkdownLink {
 
 interface ParsedData {
     frontmatter: Record<string, any> | null,
-    content: string | null
+    content: string | null,
+    headings: MarkdownHeading[]
 }
 
 /**
@@ -21,15 +23,34 @@ interface ParsedData {
  * @returns {Object} An object containing the frontmatter and content.
  */
 export function parseMarkdown(markdownContent: string | null, baseUrl: string): ParsedData {
-    if (!markdownContent) return { frontmatter: null, content: null };
+    if (!markdownContent) return { frontmatter: null, content: null, headings: [] };
 
     const { data: frontmatter, content: content } = matter(markdownContent);
     const parsedContent = parseMarkdownContent(content, baseUrl);
+    const headings = extractHeadings(content);
 
     return {
         frontmatter: frontmatter,
         content: parsedContent,
+        headings: headings
     };
+}
+
+function extractHeadings(markdown: string): MarkdownHeading[] {
+    const headings: MarkdownHeading[] = [];
+
+    marked.lexer(markdown).forEach((token: Token) => {
+        if (token.type === "heading") {
+            const heading = token as Tokens.Heading;
+            headings.push({
+                id: normalizeHeadingId(heading.text),
+                text: heading.text,
+                depth: heading.depth,
+            });
+        }
+    });
+
+    return headings;
 }
 
 function createCustomRenderer(baseUrl: string) {
@@ -49,12 +70,7 @@ function createCustomRenderer(baseUrl: string) {
         if (href.startsWith("http")) {
             return `<a href="${href}" target="_blank" rel="noopener noreferrer">${text}</a>`;
         } else if (href.startsWith("#")) {
-            const newHref = href
-                .toLocaleLowerCase()
-                .replace(/ /g, "-")
-                .replace(/%20/g, "-")
-                .replace(/[(¿?)]/g, "");
-
+            const newHref = "#" + normalizeHeadingId(href.slice(1));
             return `<a href="${newHref}">${text}</a>`;
         } else {
             return `<a href="/${baseUrl}?path=${encodeURIComponent(href)}">${text}</a>`;
@@ -62,6 +78,15 @@ function createCustomRenderer(baseUrl: string) {
     }
 
     return renderer;
+}
+
+function normalizeHeadingId(text: string): string {
+    return text
+        .toLocaleLowerCase()
+        .replace(/ /g, "-")
+        .replace(/%20/g, "-")
+        .replace(/[(¿?)]/g, "")
+        .replace(/[^\w-]+/g, "");
 }
 
 function parseMarkdownContent(markdown: string, baseUrl: string): string {
