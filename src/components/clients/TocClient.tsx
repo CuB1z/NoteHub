@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { LOADED_FILE_EVENT } from "@/config/constants";
+import { CLICKED_FILE_EVENT, LOADED_FILE_EVENT } from "@/config/constants";
 import { MarkdownHeading } from "@/types/MarkdownHeading";
 import { LoadedFileEvent } from "@/types/event/LoadedFileEvent";
 
@@ -19,12 +19,19 @@ export default function TocClient() {
             setLoading(false);
         };
 
-        // Set up a listener for the custom event
-        window.addEventListener(LOADED_FILE_EVENT, handleFileLoaded as EventListener);
+        const handleFileClick = () => {
+            setHeadings([]);
+            setLoading(true);
+        };
 
-        // Clean up the event listener on component unmount
+        // Set up listeners for custom events
+        window.addEventListener(LOADED_FILE_EVENT, handleFileLoaded as EventListener);
+        window.addEventListener(CLICKED_FILE_EVENT, handleFileClick as EventListener);
+
+        // Clean up the event listeners on component unmount
         return () => {
             window.removeEventListener(LOADED_FILE_EVENT, handleFileLoaded as EventListener);
+            window.removeEventListener(CLICKED_FILE_EVENT, handleFileClick as EventListener);
         };
     }, []);
 
