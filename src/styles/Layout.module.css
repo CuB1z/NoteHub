@@ -47,7 +47,12 @@
 }
 
 .sidebar {
-    border-right: 1px solid var(--accent-light);
+    &.left {
+        border-right: 1px solid var(--accent-light);
+    }
+    &.right {
+        border-left: 1px solid var(--accent-light);
+    }
 }
 
 .toc {
@@ -74,6 +79,5 @@
 @media (max-width: 1374px) {
     .gridLayout {
         grid-template-columns: 300px 1fr;
-        padding: 0 16px;
     }
 }

@@ -1,11 +1,14 @@
 "use client";
 
+import styles from "@/styles/TocClient.module.css";
+
 import { useEffect, useState } from "react";
 import { CLICKED_FILE_EVENT, LOADED_FILE_EVENT } from "@/config/constants";
 import { MarkdownHeading } from "@/types/MarkdownHeading";
 import { LoadedFileEvent } from "@/types/event/LoadedFileEvent";
 
 import Loader from "@/components/skeletons/Loader";
+import Link from "next/link";
 
 export default function TocClient() {
     const [headings, setHeadings] = useState<MarkdownHeading[]>([]);
@@ -38,12 +41,14 @@ export default function TocClient() {
     if (loading) return <Loader />;
 
     return (
-        <nav>
-            <ul>
-                {headings?.map((heading) => (
-                    <li key={heading.id}>{heading.text}</li>
-                ))}
-            </ul>
-        </nav>
+        <ul className={styles.toc}>
+            {headings?.map((heading) => (
+                <li key={heading.id}>
+                    <Link href={`#${heading.id}`} className={styles.tocLink}>
+                        {heading.text}
+                    </Link>
+                </li>
+            ))}
+        </ul>
     );
 }

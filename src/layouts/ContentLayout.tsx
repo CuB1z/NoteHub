@@ -19,7 +19,7 @@ export default function ContentLayout({ session, children, fileTree, toc, disabl
     return (
         <Layout session={session}>
             <div className={styles.gridLayout}>
-                <aside className={styles.sidebar}>
+                <aside className={`${styles.sidebar} ${styles.left}`}>
                     <h2 className={styles.sidebarTitle}>Knowledge</h2>
                     {fileTree}
                 </aside>
@@ -31,7 +31,10 @@ export default function ContentLayout({ session, children, fileTree, toc, disabl
                         </div>
                     ) : (children)}
                 </main>
-                <aside className={styles.toc}>{toc}</aside>
+                <aside className={`${styles.sidebar} ${styles.right}`}>
+                    <h2 className={styles.sidebarTitle}>Table of Contents</h2>
+                    {toc}
+                </aside>
             </div>
         </Layout>
     );
