@@ -57,7 +57,7 @@ export function FileTree({ nodes, basePath, recursive, selectedNode }: FileTreeP
 			<div className={`${styles.tree} ${recursive ? styles.recursive : ""}`}>
 				<ul className={styles.treeList}>
 					{nodes.map((node) => (
-						<li key={node.path} className={styles.treeItem}>
+						<li key={node.path} className={`${styles.treeItem} entry`}>
 							{node.type === "file" ? (
 								<span
 									className={`${styles.file} ${selectedNode?.path === node.path ? styles.selected : ""}`}

@@ -44,7 +44,7 @@ export default function TocClient() {
         <ul className={styles.toc}>
             {headings?.map((heading) => (
                 <li key={heading.id}>
-                    <Link href={`#${heading.id}`} className={styles.tocLink}>
+                    <Link href={`#${heading.id}`} className={`${styles.tocLink} ${styles[heading.depth]} entry`}>
                         {heading.text}
                     </Link>
                 </li>

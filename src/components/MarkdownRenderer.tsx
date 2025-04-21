@@ -5,7 +5,7 @@ export default function MarkdownRenderer({ name, frontmatter, content }: FileCon
 
     return (
         <div
-            className="markdown-body"
+            className="markdown-body entry"
             dangerouslySetInnerHTML={{ __html: content || "" }}
         ></div>
     );

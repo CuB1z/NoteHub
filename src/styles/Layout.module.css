@@ -33,7 +33,7 @@
     height: 100%;
     min-height: 100vh;
     background-color: var(--bg-secondary);
-    overflow-y: auto;
+    overflow-y: hidden;
 
     .sidebarTitle {
         height: 50px;
