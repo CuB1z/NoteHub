@@ -3,12 +3,21 @@
     height: 50px;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     padding: 10px;
     gap: 4px;
-    font-weight: 500;
-    color: var(--fg-color);
-    letter-spacing: 0.5px;
-    flex-wrap: wrap;
     border-bottom: 1px solid var(--accent-light);
+
+    .content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 4px;
+        font-weight: 500;
+        color: var(--fg-color);
+        letter-spacing: 0.5px;
+        flex-wrap: wrap;
+    }
 }

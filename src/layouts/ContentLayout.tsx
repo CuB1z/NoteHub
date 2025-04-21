@@ -24,7 +24,7 @@ export default function ContentLayout({ session, children, fileTree, toc, disabl
                     {fileTree}
                 </aside>
                 <main className={styles.mainContent}>
-                    <BreadCrumb githubOwner={githubOwner} githubRepo={githubRepo} />
+                    <BreadCrumb githubOwner={githubOwner} githubRepo={githubRepo} session={session} />
                     {disabled ? (
                         <div className={styles.disabledOverlay}>
                             {children}

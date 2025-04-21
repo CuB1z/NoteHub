@@ -128,7 +128,7 @@
     .starIcon {
         width: 16px;
         height: 16px;
-        color: rgb(209, 193, 73);
+        color: var(--star-color);
     }
 
     .count {
