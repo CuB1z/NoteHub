@@ -1,7 +1,7 @@
 /* CacheService.ts - Service for managing localStorage cache */
 
 export const STORAGE_KEY = "__notehub_cache__";
-export const EXPIRATION_TIME = 1000 * 60 * 60;
+export const EXPIRATION_TIME = 1000 * 24 * 60;
 
 /**
  * Get stored cache from localStorage.
