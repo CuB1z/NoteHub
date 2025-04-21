@@ -1,0 +1,65 @@
+
+.aboutContainer {
+    width: 100%;
+    max-width: var(--max-width);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    padding: 0 8px;
+    margin: 48px 0;
+}
+
+.heading {
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    color: var(--fg-primary);
+    text-align: center;
+    margin-top: 16px;
+    margin-bottom: 32px;
+}
+
+.em {
+    font-style: normal;
+    color: var(--accent);
+}
+
+.section {
+    width: 100%;
+    max-width: 1000px;
+    padding: 16px 32px;
+    background-color: var(--bg-secondary);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+
+    .title {
+        width: 100%;
+        max-width: 800px;
+        font-size: 24px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        line-height: 1.2;
+        color: var(--fg-primary);
+        text-align: left;
+        margin-top: 32px;
+        margin-bottom: 24px;
+    }
+
+    .paragraph {
+        width: 100%;
+        max-width: 800px;
+        font-size: 16px;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        line-height: 1.5;
+        color: var(--fg-secondary);
+        text-align: justify;
+        margin-bottom: 24px;
+    }
+}
