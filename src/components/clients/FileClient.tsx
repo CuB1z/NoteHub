@@ -42,7 +42,6 @@ export default function FileClient({ githubOwner, githubRepo, authToken, path }:
     if (loading) return <Loader />;
     if (!data) return notFound();
 
-    
     return (
         <div className={styles.container} >
             <MarkdownRenderer {...data} />
