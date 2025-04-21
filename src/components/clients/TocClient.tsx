@@ -9,6 +9,7 @@ import { LoadedFileEvent } from "@/types/event/LoadedFileEvent";
 
 import Loader from "@/components/skeletons/Loader";
 import Link from "next/link";
+import { BookMarked, ChevronRight, ChevronsRight } from "lucide-react";
 
 export default function TocClient() {
     const [headings, setHeadings] = useState<MarkdownHeading[]>([]);
@@ -45,6 +46,11 @@ export default function TocClient() {
             {headings?.map((heading) => (
                 <li key={heading.id}>
                     <Link href={`#${heading.id}`} className={`${styles.tocLink} ${styles[heading.depth]} entry`}>
+                        <div className={styles.tocIcon}>
+                            {heading.depth === 1 && <BookMarked size={16} color="var(--fg-secondary)" />}
+                            {heading.depth === 2 && <ChevronRight size={16} color="var(--fg-secondary)" />}
+                            {heading.depth > 2 && <ChevronsRight size={16} color="var(--fg-secondary)" />}
+                        </div>
                         {heading.text}
                     </Link>
                 </li>

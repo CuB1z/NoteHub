@@ -4,11 +4,18 @@
     padding: 12px 16px;
     list-style: none;
     margin: 0;
+    
+    .tocIcon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
     .tocLink {
         width: 100%;
         display: flex;
         align-items: center;
+        gap: 8px;
         margin-top: 2px;
         padding: 4px 6px;
         text-decoration: none;
@@ -17,26 +24,9 @@
         color: var(--fg-secondary);
         border-radius: 4px;
 
-        &.1 {
-            color: var(--accent);
-        }
-        &.2 { padding-left: 16px; }
-        &.3 { padding-left: 24px; }
-        &.4 { padding-left: 36px; }
-        &.5 { padding-left: 36px; }
-        &.6 { padding-left: 36px; }
-
-        &.2, &.3, &.4, &.5, &.6 {
-            &::before {
-                content: '';
-                display: inline-block;
-                width: 4px;
-                height: 4px;
-                border-radius: 99999px;
-                background-color: var(--fg-secondary);
-                margin-right: 8px;
-            }
-        }
+        &.1 { color: var(--accent); }
+        &.2 { padding-left: 8px; }
+        &.3, &.4, &.5, &.6 { padding-left: 16px; }
 
         &:hover {
             background-color: var(--bg-tertiary);
