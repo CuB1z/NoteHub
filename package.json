@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@libsql/client": "^0.15.4",
     "gray-matter": "^4.0.3",
     "lru-cache": "^11.1.0",
     "lucide-react": "^0.487.0",
