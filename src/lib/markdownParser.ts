@@ -57,7 +57,6 @@ function createCustomRenderer(baseUrl: string) {
     const renderer = new marked.Renderer();
 
     renderer.link = ({ href, text }: MarkdownLink) => {
-        console.log("Link:", href, text);
         if (text.startsWith("![") && text.includes("](")) {
             const imageMarkdown = text.match(/!\[(.*?)\]\((.*?)\)/);
             if (imageMarkdown) {

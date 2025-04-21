@@ -41,7 +41,6 @@ export function FileTree({ nodes, basePath, recursive, selectedNode }: FileTreeP
 	};
 
 	const toggleFolder = (path: string) => {
-		console.log("Toggling folder:", path);
 		setOpenFolders((prev) => ({
 			...prev,
 			[path]: !prev[path],
