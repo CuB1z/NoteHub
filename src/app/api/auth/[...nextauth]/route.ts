@@ -1,3 +1,4 @@
+import { addNewUser } from "@/services/DbService";
 import NextAuth from "next-auth";
 import { NextAuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
@@ -6,6 +7,10 @@ declare module "next-auth" {
   interface Session {
     accessToken?: string;
     userName?: string;
+  }
+
+  interface Profile {
+    login: string;
   }
 }
 
@@ -22,6 +27,13 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
+    async signIn({ profile }) {
+      if (profile?.login) {
+        await addNewUser({ username: profile.login });
+      }
+      
+      return true;
+    },
     async session({ session, token }) {
       session.accessToken = token.accessToken as string;
       session.userName = token.userName as string;
