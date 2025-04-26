@@ -4,5 +4,5 @@ export const DEFAULT_THEME = "default";
 
 export const THEMES = [
     "default",
-    "light",
+    "dracula",
 ]

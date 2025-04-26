@@ -1,5 +1,6 @@
 @import url("./themes/default.css");
 @import url("./themes/light.css");
+@import url("./themes/dracula.css");
 
 :root {
   --section-x-padding: 32px;
