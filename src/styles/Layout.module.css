@@ -80,4 +80,8 @@
     .gridLayout {
         grid-template-columns: 300px 1fr;
     }
+
+    .sidebar.right {
+        display: none;
+    }
 }

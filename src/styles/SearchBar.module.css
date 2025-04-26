@@ -40,6 +40,12 @@
     outline: none;
     transition: all 0.2s ease;
 
+    &::placeholder {
+        font-weight: 400;
+        color: var(--fg-secondary);
+        opacity: 0.5;
+    }
+
     &:focus {
         border-color: var(--accent);
         box-shadow: 0 0 4px var(--accent-light);

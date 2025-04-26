@@ -1,21 +1,6 @@
-
-:root {
-    --bg-color: var(--bg-primary);
-    --fg-color: var(--fg-primary);
-    --accent-color: var(--accent);
-    --bold-color: var(--accent);
-    --em-color: var(--accent-secondary);
-    --highlight-color: var(--accent);
-    --border-color: var(--accent-light);
-    --link-color: var(--fg-secondary);
-    --code-bg-color: var(--bg-secondary);
-    --code-fg-color: var(--fg-secondary);
-    --blockquote-bg-color: var(--bg-primary-light);
-}
-
 .markdown-body {
-    background-color: var(--bg-color);
-    color: var(--fg-color);
+    background-color: var(--bg-primary);
+    color: var(--fg-primary);
     line-height: 1.6;
     padding: 20px;
     width: 100%;
@@ -32,7 +17,7 @@
     h2,
     h3 {
         text-align: left;
-        color: var(--highlight-color);
+        color: var(--accent);
         margin-top: 1.5rem;
         margin-bottom: 0.75rem;
     }
@@ -64,7 +49,7 @@
 
     hr {
         border: 0;
-        border-top: 2px solid var(--border-color);
+        border-top: 2px solid var(--accent-light);
         margin: 24px 0;
         width: 100%;
     }
@@ -80,7 +65,7 @@
     }
 
     a {
-        color: var(--link-color);
+        color: var(--fg-secondary);
         text-decoration: none;
 
         &:hover {
@@ -90,12 +75,12 @@
 
     strong {
         font-weight: 700;
-        color: var(--bold-color);
+        color: var(--accent);
     }
 
     em {
         font-style: italic;
-        color: var(--em-color);
+        color: var(--accent-secondary);
     }
 
     img {
@@ -106,35 +91,35 @@
     }
 
     pre {
-        background-color: var(--code-bg-color);
-        border: 1px solid var(--border-color);
+        background-color: var(--bg-secondary);
+        border: 1px solid var(--accent-light);
         padding: 1rem;
         border-radius: 4px;
         font-family: 'Fira Code', monospace;
         font-size: 0.875rem;
         font-weight: 500;
         overflow-x: auto;
-        color: var(--code-fg-color);
+        color: var(--fg-secondary);
         margin-bottom: 12px;
     }
 
     code {
-        background-color: var(--code-bg-color);
+        background-color: var(--bg-secondary);
         padding: 0.2rem 0.4rem;
         border-radius: 4px;
         font-size: 0.875rem;
-        color: var(--code-fg-color);
+        color: var(--fg-secondary);
     }
 
     blockquote {
-        background-color: var(--blockquote-bg-color);
-        border-left: 4px solid var(--accent-color);
+        background-color: var(--bg-primary-light);
+        border-left: 4px solid var(--accent);
         padding: 12px 16px;
         padding-left: 20px;
         margin-left: 0;
-        color: var(--fg-color);
+        color: var(--fg-primary);
         border-radius: 4px;
-        
+
         &:has(hr) {
             background: none;
             border: none;
@@ -151,11 +136,11 @@
     td {
         padding: 8px;
         text-align: left;
-        border-bottom: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--accent-light);
     }
 
     th {
-        background-color: var(--bg-color);
+        background-color: var(--bg-primary);
         font-weight: bold;
     }
 

@@ -1,6 +1,8 @@
 @import url("./themes/default.css");
-@import url("./themes/light.css");
 @import url("./themes/dracula.css");
+@import url("./themes/nord.css");
+@import url("./themes/fusion.css");
+@import url("./themes/volcano.css");
 
 :root {
   --section-x-padding: 32px;
@@ -29,7 +31,7 @@ body {
   justify-content: center;
   color: var(--foreground);
   background: var(--bg-primary);
-  scrollbar-color: var(--accent-light) var(--bg-secondary);
+  scrollbar-color: var(--accent-light) var(--bg-primary);
 }
 
 * {
@@ -39,7 +41,6 @@ body {
   font-family: "ui-sans-serif", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   scroll-behavior: smooth;
   scrollbar-width: thin;
-  scrollbar-color: var(--accent-light) var(--bg-secondary);
   color: var(--fg-primary);
 }
 

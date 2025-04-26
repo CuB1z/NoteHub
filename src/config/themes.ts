@@ -5,4 +5,7 @@ export const DEFAULT_THEME = "default";
 export const THEMES = [
     "default",
     "dracula",
+    "nord",
+    "fusion",
+    "volcano"
 ]
