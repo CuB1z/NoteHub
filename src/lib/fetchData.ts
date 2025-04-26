@@ -12,22 +12,26 @@ interface fetchProps {
 }
 
 export async function fetchData<T>({ url, authToken, responseType }: fetchProps): Promise<T | null> {
-  const cacheKey = `${url}-${authToken}`;
+  const cacheKey = `${url}-${authToken || "Global"}`;
 
   if (cache.has(cacheKey)) {
     return cache.get(cacheKey) as T;
   }
 
-  const headers: Record<string, string> = {};
-  if (authToken) {
-    headers["Authorization"] = `Bearer ${authToken}`;
-  }
+  const token = authToken || process.env.GITHUB_DEFAULT_TOKEN;
+  const headers = { "Authorization": `Bearer ${token}` };
+
+  console.log("Fetching data from URL:", url);
+  console.log("Using headers:", headers);
+  console.log("Cache key:", cacheKey);
 
   try {
     const response = await fetch(url, {
       method: "GET",
       headers: headers
     });
+
+    console.log(response);
 
     if (!response.ok) {
       return null;
