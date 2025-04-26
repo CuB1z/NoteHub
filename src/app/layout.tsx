@@ -1,19 +1,16 @@
-"use client";
-
 import "@/styles/globals.css";
 
-import { SessionProvider } from "next-auth/react";
+import { cookies } from "next/headers";
+import { DEFAULT_THEME, THEME_COOKIE_NAME } from "@/config/themes";
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html lang="en">
-      <body>
-        <SessionProvider>{children}</SessionProvider>
-      </body>
-    </html>
-  );
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+	const theme = (await cookies()).get(THEME_COOKIE_NAME)?.value || DEFAULT_THEME;
+
+	return (
+		<html lang="en">
+			<body className={theme}>
+				{children}
+			</body>
+		</html>
+	);
 }

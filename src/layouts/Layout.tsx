@@ -1,9 +1,9 @@
 import styles from "@/styles/Layout.module.css";
 
-import Header from "@/components/Header";
-import SessionWrapper from "@/components/wrappers/SessionWrapper";
-
 import { Session } from "next-auth";
+import NextAuthProvider from "@/providers/NextAuthProvider";
+
+import Header from "@/components/Header";
 import Footer from "@/components/sections/Footer";
 
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
 
 export default function Layout({ session, children }: Props) {
     return (
-        <SessionWrapper>
+        <NextAuthProvider>
             <div className={styles.container}>
                 <Header session={session}/>
                     <div className={styles.content}>
@@ -21,6 +21,6 @@ export default function Layout({ session, children }: Props) {
                     </div>
                 <Footer />
             </div>
-        </SessionWrapper>
+        </NextAuthProvider>
     )
 }

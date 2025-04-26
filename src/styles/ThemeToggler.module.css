@@ -1,0 +1,70 @@
+
+.container {
+    position: relative;
+    display: inline-block;
+    gap: 16px;
+}
+
+.dropdown {
+    position: absolute;
+    min-width: 140px;
+    z-index: 1000;
+    top: 115%;
+    right: 0;
+    background: var(--bg-secondary);
+    border: 1px solid var(--accent-light);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    animation: fadeIn 0.2s ease;
+}
+
+.themeOption {
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    border-bottom: 1px solid var(--accent-light);
+
+    .text {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--fg-primary);
+    }
+
+    &:hover {
+        background: var(--bg-tertiary);
+    }
+
+    &:last-child {
+        border-bottom: none;
+        border-radius: 0 0 4px 4px;
+    }
+
+    &:first-child {
+        border-radius: 4px 4px 0 0;
+    }
+
+    &.active {
+        background: var(--bg-tertiary);
+        color: var(--accent);
+        font-weight: 600;
+    }
+}
+
+.checkIcon {
+    stroke: var(--accent);
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

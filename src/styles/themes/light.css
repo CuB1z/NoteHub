@@ -1,0 +1,12 @@
+.light {
+    --bg-primary: #f5f5f0;
+    --bg-primary-light: #eaeae5;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f0f0e8;
+    --accent: #7d8005;
+    --accent-secondary: #9ca318;
+    --accent-light: #e8ebc7;
+    --fg-primary: #333333;
+    --fg-secondary: #666666;
+    --star-color: #b5a218;
+}

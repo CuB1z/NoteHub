@@ -1,16 +1,7 @@
+@import url("./themes/default.css");
+@import url("./themes/light.css");
+
 :root {
-  --bg-primary: #282828;
-  --bg-primary-light: #31302f;
-  --bg-secondary: #212121;
-  --bg-tertiary: #2c2d2d;
-  --accent: #b8bb26;
-  --accent-secondary: #d9cb90;
-  --accent-light: #494919;
-  --fg-primary: #ddded8;
-  --fg-secondary: #bbc0c7;
-
-  --star-color: #d1c149;
-
   --section-x-padding: 32px;
   --max-width: 1200px;
   --header-height: 70px;
@@ -37,6 +28,7 @@ body {
   justify-content: center;
   color: var(--foreground);
   background: var(--bg-primary);
+  scrollbar-color: var(--accent-light) var(--bg-secondary);
 }
 
 * {
