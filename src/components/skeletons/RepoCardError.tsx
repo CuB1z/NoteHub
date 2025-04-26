@@ -1,7 +1,7 @@
 import styles from "@/styles/sections/Examples.module.css";
 import { WifiOff } from "lucide-react";
 
-export default function ExampleError() {
+export default function RepoCardError() {
     return (
         <div className={`${styles.card} ${styles.error}`}>
             <WifiOff className={styles.icon} />

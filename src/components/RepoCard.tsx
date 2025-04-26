@@ -1,11 +1,11 @@
-import styles from "@/styles/sections/Examples.module.css";
+import styles from "@/styles/RepoCard.module.css";
 
 import { RepositoryData } from "@/types/RepositoryData";
 import { Github, Search, StarIcon } from "lucide-react";
 import Link from "next/link";
 import Button from "@/components/buttons/Button";
 
-export default function Example({ repo }: { repo: RepositoryData }) {
+export default function RepoCard({ repo }: { repo: RepositoryData }) {
     return (
         <div className={styles.card}>
             <div className={styles.cardHeader}>
@@ -22,7 +22,6 @@ export default function Example({ repo }: { repo: RepositoryData }) {
             </div>
             <p className={styles.description}>{repo.description}</p>
             <div className={styles.cardFooter}>
-
                 <Link href={`/${repo.owner.name}`} className={styles.avatarContainer}>
                     <img src={repo.owner.avatar} alt={`${repo.owner.name} avatar`} className={styles.avatar} />
                 </Link>

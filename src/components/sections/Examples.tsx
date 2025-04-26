@@ -1,7 +1,7 @@
 import styles from "@/styles/sections/Examples.module.css";
 
 import SectionHeader from "@/components/SectionHeader";
-import ExampleClient from "../clients/ExampleClient";
+import RepoCardClient from "@/components/clients/RepoCardClient";
 import { RepoOptions } from "@/services/RepositoryService";
 
 interface ExampleProps {
@@ -20,7 +20,7 @@ export default function Examples({ examples, authToken }: ExampleProps) {
             />
             <div className={styles.content}>
                 {examples.map((repo, index) => (
-                    <ExampleClient key={index} repo={repo} authToken={authToken} />
+                    <RepoCardClient key={index} repo={repo} authToken={authToken} />
                 ))}
             </div>
         </section>

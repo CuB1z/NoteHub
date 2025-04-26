@@ -1,6 +1,6 @@
 import styles from "@/styles/sections/Examples.module.css";
 
-export default function ExampleSkeleton() {
+export default function RepoCardSkeleton() {
     return (
         <div className={`${styles.card} ${styles.skeletonContainer}`}>
             <div className={styles.cardHeader}>
