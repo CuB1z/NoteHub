@@ -1,8 +1,6 @@
 import styles from "@/styles/Header.module.css";
 
 import { Session } from "next-auth";
-import { cookies } from "next/dist/server/request/cookies";
-import { DEFAULT_THEME, THEME_COOKIE_NAME } from "@/config/themes";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -13,9 +11,8 @@ interface HeaderProps {
     session: Session | null;
 }
 
-export default async function Header({ session }: HeaderProps) {
+export default function Header({ session }: HeaderProps) {
     const userName = session?.userName;
-    const currentTheme = (await cookies()).get(THEME_COOKIE_NAME)?.value || DEFAULT_THEME;
 
     return (
         <header className={styles.header}>
@@ -38,7 +35,7 @@ export default async function Header({ session }: HeaderProps) {
                         :
                         <LoginButton />
                     }
-                    <ThemeToggler currentTheme={currentTheme} />
+                    <ThemeToggler />
                 </div>
             </div>
         </header>

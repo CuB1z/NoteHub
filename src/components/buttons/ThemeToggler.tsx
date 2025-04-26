@@ -3,17 +3,14 @@
 import styles from "@/styles/ThemeToggler.module.css";
 
 import { useState, useRef, useEffect } from "react";
+import { DEFAULT_THEME, THEME_COOKIE_NAME, THEMES } from "@/config/themes";
+
 import Button from "@/components/buttons/Button";
 import { Blend, BadgeCheck } from "lucide-react";
-import { THEME_COOKIE_NAME, THEMES } from "@/config/themes";
 
-interface ThemeTogglerProps {
-    currentTheme: string;
-}
-
-export default function ThemeToggler({ currentTheme: theme }: ThemeTogglerProps) {
+export default function ThemeToggler() {
     const [open, setOpen] = useState(false);
-    const [currentTheme, setCurrentTheme] = useState(theme);
+    const [currentTheme, setCurrentTheme] = useState(DEFAULT_THEME);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
     const handleThemeChange = (theme: string) => {
@@ -22,6 +19,15 @@ export default function ThemeToggler({ currentTheme: theme }: ThemeTogglerProps)
         document.cookie = `${THEME_COOKIE_NAME}=${theme}; path=/; max-age=31536000;`;
         setOpen(false);
     }
+
+    useEffect(() => {
+        const themeCookie = document.cookie.split('; ').find(row => row.startsWith(`${THEME_COOKIE_NAME}=`));
+        if (themeCookie) {
+            console.log(themeCookie);
+            const theme = themeCookie.split('=')[1];
+            setCurrentTheme(theme);
+        }
+    }, []);
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
