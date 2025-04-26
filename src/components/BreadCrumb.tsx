@@ -28,6 +28,8 @@ export default function BreadCrumb({ githubOwner, githubRepo, session }: BreadCr
     // Check if the current repo is in the favorites list
     useEffect(() => {
         const fetchData = async () => {
+            if (!session?.userName) return;
+            
             const res = await fetch(buildUrl(session?.userName || ""));
             const { favoriteRepos } = await res.json() as { favoriteRepos: string[] };
             const isFavorite = favoriteRepos.some((repo: string) => {
