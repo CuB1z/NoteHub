@@ -8,15 +8,17 @@ import Button from "@/components/buttons/Button";
 import LogOutButton from "@/components/buttons/LogOutButton";
 import Favorites from "@/components/sections/Favorites";
 import { Github, GitFork, UsersRound, Rss } from "lucide-react";
+import Loader from "../skeletons/Loader";
 
 interface ProfileProps {
     userData: UserData;
     repos: RepoOptions[];
     isOwner?: boolean;
     authToken?: string | null | undefined;
+    isLoading?: boolean;
 }
 
-export default function Profile({ userData, isOwner, repos, authToken }: ProfileProps) {
+export default function Profile({ userData, isOwner, repos, authToken, isLoading }: ProfileProps) {
     return (
         <>
             <section className={styles.profileSection}>
@@ -73,7 +75,13 @@ export default function Profile({ userData, isOwner, repos, authToken }: Profile
                     </div>
                 </div>
             </section>
-            <Favorites repos={repos} authToken={authToken} />
+            <section className={styles.section}>
+                <div className={styles.content}>
+                    <h2 className={styles.title}>Pinned Repositories</h2>
+                    {isLoading && <Loader size={24} />}
+                    {!isLoading && <Favorites repos={repos} authToken={authToken} profileName={userData.username} />}
+                </div>
+            </section>
         </>
     );
 }

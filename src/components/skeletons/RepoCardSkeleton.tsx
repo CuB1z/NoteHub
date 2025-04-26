@@ -1,4 +1,4 @@
-import styles from "@/styles/sections/Examples.module.css";
+import styles from "@/styles/RepoCard.module.css";
 
 export default function RepoCardSkeleton() {
     return (

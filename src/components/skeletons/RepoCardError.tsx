@@ -1,11 +1,23 @@
-import styles from "@/styles/sections/Examples.module.css";
-import { WifiOff } from "lucide-react";
+import styles from "@/styles/RepoCard.module.css";
+import { WifiOff, FolderLock } from "lucide-react";
 
-export default function RepoCardError() {
+interface RepoCardErrorProps {
+    isPrivate?: boolean;
+}
+
+export default function RepoCardError({ isPrivate }: RepoCardErrorProps) {
+    const text = isPrivate
+        ? "This repository is private and cannot be accessed."
+        : "An error has occurred. Please try again later.";
+    
+    const icon = isPrivate
+        ? <FolderLock className={styles.icon} />
+        : <WifiOff className={styles.icon} />;
+
     return (
         <div className={`${styles.card} ${styles.error}`}>
-            <WifiOff className={styles.icon} />
-            <p className={styles.errorText}>An error has occurred. Please try again later.</p>
+            {icon}
+            <p className={styles.errorText}>{text}</p>
         </div>
     )
 }

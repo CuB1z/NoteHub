@@ -21,17 +21,11 @@ export async function fetchData<T>({ url, authToken, responseType }: fetchProps)
   const token = authToken || process.env.GITHUB_DEFAULT_TOKEN;
   const headers = { "Authorization": `Bearer ${token}` };
 
-  console.log("Fetching data from URL:", url);
-  console.log("Using headers:", headers);
-  console.log("Cache key:", cacheKey);
-
   try {
     const response = await fetch(url, {
       method: "GET",
       headers: headers
     });
-
-    console.log(response);
 
     if (!response.ok) {
       return null;
@@ -43,8 +37,5 @@ export async function fetchData<T>({ url, authToken, responseType }: fetchProps)
       
     cache.set(cacheKey, data);
     return data;
-  } catch (error) {
-    console.error("Fetch error:", error);
-    return null;
-  }
+  } catch (error) { return null; }
 }

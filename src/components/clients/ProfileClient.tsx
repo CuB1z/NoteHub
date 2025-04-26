@@ -19,7 +19,9 @@ function buildUrl(githubOwner: string): string {
 
 export default function ProfileClient({ githubOwner, authToken, isOwner }: ProfileClientProps) {
     const { data, loading, error } = useFetchCache<UserData>(buildUrl(githubOwner), authToken);
+
     const [repositories, setRepositories] = useState<RepoOptions[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchRepositories = async () => {
@@ -32,6 +34,7 @@ export default function ProfileClient({ githubOwner, authToken, isOwner }: Profi
             });
 
             setRepositories(repos);
+            setIsLoading(false);
         };
 
         fetchRepositories();
@@ -41,5 +44,5 @@ export default function ProfileClient({ githubOwner, authToken, isOwner }: Profi
     if (loading) return <ProfileSkeleton />;
     if (!data) return <div>No data available</div>;
 
-    return <Profile userData={data} isOwner={isOwner} repos={repositories} authToken={authToken} />
+    return <Profile userData={data} isOwner={isOwner} repos={repositories} authToken={authToken} isLoading={isLoading} />
 }
