@@ -49,12 +49,8 @@ a {
   text-decoration: none;
 }
 
-.icon {
-  color: var(--fg-primary);
-
-  &.accent {
-    color: var(--accent);
-  }
+svg {
+  stroke: inherit;
 }
 
 @media (prefers-color-scheme: dark) {

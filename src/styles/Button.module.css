@@ -38,8 +38,11 @@
         padding: 4px;
         width: 40px;
         height: 40px;
+        stroke: var(--fg-primary);
+
         &:hover {
             border: 1px solid var(--accent);
+            stroke: var(--accent);
         }
         
         &.loading {
@@ -56,9 +59,11 @@
         border: none;
         background-color: transparent;
         color: var(--fg-primary);
+        stroke: var(--fg-primary);
 
         &:hover {
             color: var(--accent);
+            stroke: var(--accent);
             scale: 1.1;
         }
     }
