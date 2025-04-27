@@ -47,6 +47,7 @@
                 border-radius: 99999px;
                 background-color: var(--bg-secondary);
                 margin-bottom: 16px;
+                stroke: var(--fg-primary);
             }
 
             .title {
