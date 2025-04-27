@@ -136,6 +136,7 @@
 }
 
 .icon {
+    stroke: var(--fg-primary);
     width: 20px;
     height: 20px;
 }

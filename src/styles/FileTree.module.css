@@ -51,6 +51,7 @@
 	font-weight: 500;
 	transition: color 0.2s ease;
 	color: var(--fg-secondary);
+    stroke: var(--fg-secondary);
 	text-decoration: none;
 
     &:hover {

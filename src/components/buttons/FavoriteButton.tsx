@@ -1,5 +1,7 @@
 "use client";
 
+import styles from "@/styles/Button.module.css";
+
 import Button from "@/components/buttons/Button";
 import { Star } from "lucide-react";
 
@@ -43,8 +45,7 @@ export default function FavoriteButton({ isFavorite, onClick, username, repoUrl 
             onClick={handleClick}
         >
             <Star
-                color="var(--star-color)"
-                fill={isFavorite ? "var(--star-color)" : "none"}
+                className={`${styles.favoriteButton} ${isFavorite ? styles.active : ""}`}
             />
         </Button>
     );

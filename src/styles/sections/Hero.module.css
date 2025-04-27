@@ -47,6 +47,7 @@
     opacity: 0.8;
 
     .scrollIcon {
+        stroke: var(--fg-primary);
         animation: scrolling 1s ease-in-out infinite alternate;
     }
 }
