@@ -8,6 +8,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
 	return (
 		<html lang="en">
+			<head>
+				<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+			</head>
 			<body className={theme}>
 				{children}
 			</body>
