@@ -2,7 +2,7 @@ import { validateRepoUrl } from "@/lib/validationUtils";
 import { addFavouriteRepo, deleteFavouriteRepo, getUserFavoriteRepos } from "@/services/DbService";
 
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/config/authOptions";
 
 export async function POST(req: Request) {
     const { username, repoUrl } = await req.json();

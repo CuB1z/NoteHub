@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/config/authOptions";
 import { metadata as meta, APP_NAME } from "@/config/metadata";
 
 import Layout from "@/layouts/Layout";

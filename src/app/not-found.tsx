@@ -1,6 +1,6 @@
 import Layout from "@/layouts/Layout";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/config/authOptions";
 
 export default async function Custom404() {
     const session = await getServerSession(authOptions);

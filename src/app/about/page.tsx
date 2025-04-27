@@ -1,7 +1,7 @@
 import styles from "@/styles/About.module.css";
 
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/config/authOptions";
 
 import { APP_NAME } from "@/config/metadata";
 import { ABOUT_SECTION_DATA } from "@/config/aboutSectionData";
