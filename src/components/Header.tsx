@@ -17,7 +17,7 @@ export default function Header({ session }: HeaderProps) {
     return (
         <header className={styles.header}>
             <div className={styles.content}>
-                <Link href="/" className={styles.logo}>
+                <Link href="/#" className={styles.logo}>
                     <h1>NoteHub</h1>
                 </Link>
                 <div className={styles.right}>
