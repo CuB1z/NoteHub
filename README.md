@@ -9,9 +9,8 @@
 
 Whether you're reviewing project documentation, checking personal notes, or simply browsing through your Markdown files, NoteHub makes the experience smooth and accessible.
 
-**👉 [Try NoteHub here](https://n0tehub.vercel.app/)!**
+**👉 [Try NoteHub here!](https://n0tehub.vercel.app/)**
 
----
 
 ## 🌟 Features
 
@@ -20,9 +19,6 @@ Whether you're reviewing project documentation, checking personal notes, or simp
 - 🔒 **Secure GitHub Integration**: Connect to both public and private repositories securely and easily.
 - 🎨 **Customizable Themes**: Adjust the interface to match your style with multiple theme options.
 - 🔗 **Obsidian Compatibility**: Manage and view your Obsidian-styled notes seamlessly.
-
-
----
 
 ## 📦 Installation
 
@@ -50,22 +46,16 @@ npm run dev
    - Open your browser and navigate to `http://localhost:3000`.
     - You should see the NoteHub interface, ready for you to explore your repositories.
 
----
-
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!  
 Feel free to check the [issues page](https://github.com/CuB1z/NoteHub/issues) if you want to contribute.
-
----
 
 ## 🧾 Credits
 
 | Author  | LinkedIn                                            | GitHub                             |
 | ------- | --------------------------------------------------- | ---------------------------------- |
 | CuB1z   | [Diego Sánchez](https://www.linkedin.com/in/cub1z/) | [@CuB1z](https://github.com/CuB1z) |
-
----
 
 ## 📜 License
 
