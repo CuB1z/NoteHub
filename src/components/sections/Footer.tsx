@@ -21,7 +21,7 @@ export default function Footer() {
                     </div>
 
                     <div className={styles.section}>
-                        <h4 className={styles.sectionTitle}>Created by <strong className={styles.author}>CuB1z</strong></h4>
+                        <h4 className={`${styles.sectionTitle} ${styles.right}`}>Created by <strong className={styles.author}>CuB1z</strong></h4>
                         <div className={styles.socialLinks}>
                             <Button
                                 variant="toolUnbordered"
