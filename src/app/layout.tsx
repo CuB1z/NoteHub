@@ -10,6 +10,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 		<html lang="en">
 			<head>
 				<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+				<link rel="manifest" href="manifest.json" />
 			</head>
 			<body className={theme}>
 				{children}
