@@ -1,9 +1,12 @@
+"use client";
+
 import styles from "@/styles/Layout.module.css";
 import { Session } from "next-auth";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 
 import Layout from "./Layout";
 import BreadCrumb from "@/components/BreadCrumb";
+import SideBarButton from "@/components/buttons/SideBarButton";
 
 type Props = {
     session: Session | null;
@@ -16,15 +19,27 @@ type Props = {
 };
 
 export default function ContentLayout({ session, children, fileTree, toc, disabled, githubOwner, githubRepo }: Props) {
+    const [isTreeOpen, setIsTreeOpen] = useState(false);
+
     return (
         <Layout session={session}>
             <div className={styles.gridLayout}>
-                <aside className={`${styles.sidebar} ${styles.left}`}>
-                    <h2 className={styles.sidebarTitle}>Knowledge</h2>
+                <aside className={`${styles.sidebar} ${styles.left} ${isTreeOpen ? styles.open : ""}`}>
+                    <div className={styles.sidebarTitle}>
+                        <h2 className={styles.title}>Knowledge</h2>
+                        <div className="mobile-only">
+                            <SideBarButton action="CLOSE" onToggle={() => setIsTreeOpen(false)} />
+                        </div>
+                    </div>
                     {fileTree}
                 </aside>
                 <main className={styles.mainContent}>
-                    <BreadCrumb githubOwner={githubOwner} githubRepo={githubRepo} session={session} />
+                    <BreadCrumb
+                        githubOwner={githubOwner}
+                        githubRepo={githubRepo}
+                        session={session}
+                        onToggleFileTree={() => setIsTreeOpen(!isTreeOpen)}
+                    />
                     {disabled ? (
                         <div className={styles.disabledOverlay}>
                             {children}
@@ -32,7 +47,9 @@ export default function ContentLayout({ session, children, fileTree, toc, disabl
                     ) : (children)}
                 </main>
                 <aside className={`${styles.sidebar} ${styles.right}`}>
-                    <h2 className={styles.sidebarTitle}>Table of Contents</h2>
+                    <div className={styles.sidebarTitle}>
+                        <h2 className={styles.title}>Table of Contents</h2>
+                    </div>
                     {toc}
                 </aside>
             </div>

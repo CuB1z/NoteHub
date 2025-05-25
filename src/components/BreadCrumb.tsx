@@ -8,9 +8,11 @@ import FavoriteButton from "./buttons/FavoriteButton";
 import { useEffect, useState } from "react";
 import { RepoOptions } from "@/services/RepositoryService";
 import { Session } from "next-auth";
+import SideBarButton from "./buttons/SideBarButton";
 
 interface BreadCrumbProps extends RepoOptions {
     session: Session | null | undefined;
+    onToggleFileTree: () => void;
 }
 
 function buildUrl(githubOwner: string) {
@@ -21,7 +23,9 @@ function originalUrl(githubOwner: string, githubRepo: string) {
     return `https://github.com/${githubOwner}/${githubRepo}`;
 }
 
-export default function BreadCrumb({ githubOwner, githubRepo, session }: BreadCrumbProps) {
+export default function BreadCrumb({
+    githubOwner, githubRepo, session, onToggleFileTree
+}: BreadCrumbProps) {
     const [isFavorite, setIsFavorite] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -49,14 +53,17 @@ export default function BreadCrumb({ githubOwner, githubRepo, session }: BreadCr
 
     return (
         <div className={styles.breadcrumb}>
+            <div className="mobile-only">
+                <SideBarButton action="OPEN" onToggle={onToggleFileTree} />
+            </div>
             <div className={styles.content}>
                 <Button
                     label={githubOwner}
                     variant="text"
                     isLink
                     href={`/${githubOwner}`}
-                ><Home /></Button>
-                <span>{`${">"}`}</span>
+                />
+                <span>{`${"/"}`}</span>
                 <Button
                     label={githubRepo}
                     variant="text"

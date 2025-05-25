@@ -73,3 +73,9 @@ svg {
       transform: translateX(0);
   }
 }
+
+@media (width > 1000px) {
+  .mobile-only {
+    display: none;
+  }
+}
