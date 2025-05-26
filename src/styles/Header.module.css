@@ -11,8 +11,7 @@
     justify-content: center;
     padding: 12px 16px;
 
-    backdrop-filter: blur(10px);
-    background: rgba(0, 0, 0, 0.3);
+    background-color: var(--bg-primary-dark);
     padding-bottom: 12px;
     border-bottom: 1px solid var(--accent-light);
     z-index: 1000;

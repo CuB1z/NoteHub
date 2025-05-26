@@ -1,6 +1,7 @@
 .default {
     --bg-primary: #282828;
     --bg-primary-light: #31302f;
+    --bg-primary-dark: #1f1f1f;
     --bg-secondary: #212121;
     --bg-tertiary: #2c2d2d;
     --accent: #b8bb26;
