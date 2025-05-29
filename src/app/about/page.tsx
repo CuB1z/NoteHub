@@ -5,8 +5,11 @@ import { authOptions } from "@/config/authOptions";
 
 import { APP_NAME } from "@/config/metadata";
 import { ABOUT_SECTION_DATA } from "@/config/aboutSectionData";
+import { metadata as meta } from "@/config/metadata";
 
 import Layout from "@/layouts/Layout";
+
+export const metadata = meta;
 
 export default async function About() {
     const session = await getServerSession(authOptions);
