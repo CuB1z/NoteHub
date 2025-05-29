@@ -75,13 +75,15 @@ export default function Profile({ userData, isOwner, repos, authToken, isLoading
                     </div>
                 </div>
             </section>
-            <section className={styles.section}>
-                <div className={styles.content}>
-                    <h2 className={styles.title}>Pinned Repositories</h2>
-                    {isLoading && <Loader size={24} />}
-                    {!isLoading && <Favorites repos={repos} authToken={authToken} profileName={userData.username} />}
-                </div>
-            </section>
+            {isOwner && (
+                <section className={styles.section}>
+                    <div className={styles.content}>
+                        <h2 className={styles.title}>Pinned Repositories</h2>
+                        {isLoading && <Loader size={24} />}
+                        {!isLoading && <Favorites repos={repos} authToken={authToken} profileName={userData.username} />}
+                    </div>
+                </section>
+            )}
         </>
     );
 }
