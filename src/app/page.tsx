@@ -16,7 +16,7 @@ export const metadata = meta;
 const exampleRepos: RepoOptions[] = [
 	{ githubOwner: "midudev", githubRepo: "eloquent-javascript-es" },
 	{ githubOwner: "ashishpatel26", githubRepo: "ML-Notes-in-Markdown" },
-	{ githubOwner: "keyvanakbary", githubRepo: "learning-notes" }
+	{ githubOwner: "cub1z", githubRepo: "URJC_Notes" }
 ]
 
 export default async function Home() {
