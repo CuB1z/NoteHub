@@ -1,5 +1,6 @@
 .button {
     height: 40px;
+    width: max-content;
     padding: 2px 16px;
     display: flex;
     justify-content: center;
